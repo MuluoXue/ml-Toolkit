@@ -7,7 +7,7 @@
 
     <groupId>ml.toolkit</groupId>
     <artifactId>ml-toolkit</artifactId>
-    <version>1.0.develop.version</version>
+    <version>1.0.0.develop.version</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
