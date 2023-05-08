@@ -7,24 +7,45 @@
 
     <groupId>ml.toolkit</groupId>
     <artifactId>ml-toolkit</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0.develop.version</version>
+
+    <modules>
+        <module>ml-toolkit-common</module>
+        <module>ml-toolkit-mybatis-plus</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <lombok.version>1.16.18</lombok.version>
     </properties>
 
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
 
-    </dependencies>
+            <dependency>
+                <groupId>com.ml</groupId>
+                <artifactId>ml-common-util</artifactId>
+                <version>1.0.develop.version</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 为了能推送到阿里云maven仓库设置 -->
+    <distributionManagement>
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://packages.aliyun.com/maven/repository/2167458-release-GshPyN/</url>
+        </repository>
+    </distributionManagement>
 
 </project>

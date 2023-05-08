@@ -1,4 +1,4 @@
-package com.ml.toolkit.util;
+package com.ml.toolkit.common.util;
 
 /**
  * 字符串判断

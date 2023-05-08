@@ -1,6 +1,6 @@
-package com.ml.toolkit.collection;
+package com.ml.toolkit.common.collection;
 
-import com.ml.toolkit.util.ObjectUtil;
+import com.ml.toolkit.common.util.ObjectUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.ml.toolkit.util;
+package com.ml.toolkit.common.util;
 
-import com.ml.toolkit.collection.ListUtil;
+import com.ml.toolkit.common.collection.ListUtil;
 
 import java.io.Serializable;
 import java.util.List;
