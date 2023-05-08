@@ -31,12 +31,6 @@
                 <version>${lombok.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.ml</groupId>
-                <artifactId>ml-common-util</artifactId>
-                <version>1.0.develop.version</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
