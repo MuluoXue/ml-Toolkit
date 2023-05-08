@@ -16,13 +16,15 @@ import java.util.List;
 @RequestMapping("/mybatisPlus")
 public class MybatisPlusController {
 
+    public static final int DATA_SIZE = 1000;
+
     @Resource
     private DemoDao demoDao;
 
     @RequestMapping("/test")
     public void test() {
         List<Demo> list = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < DATA_SIZE; i++) {
             Demo demo = new Demo();
             demo.setName("ml" + i);
             demo.setAge(i);
