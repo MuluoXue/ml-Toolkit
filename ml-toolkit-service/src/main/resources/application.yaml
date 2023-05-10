@@ -1,0 +1,17 @@
+server:
+  port: 10030
+spring:
+  application:
+    name: ml-toolkit-service
+  profiles:
+    include: develop
+
+#  配置xml 所在的路径
+mybatis-plus:
+  mapper-locations: classpath*:com/ml/**/dao/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.ml: info

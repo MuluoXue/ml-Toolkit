@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
  * EnableOpenApi 启动openApi 生产HTML页面
  */
 @SpringBootApplication
-@ComponentScan("com.ml.toolkit")
 public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class).run(args);
