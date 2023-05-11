@@ -21,6 +21,7 @@
         <module>ml-toolkit-common</module>
         <module>ml-toolkit-mybatis-plus</module>
         <module>ml-toolkit-service</module>
+        <module>ml-toolkit-form</module>
     </modules>
 
     <properties>
@@ -30,6 +31,7 @@
         <mysql.version>8.0.23</mysql.version>
         <lombok.version>1.16.18</lombok.version>
         <mybatis.plus.spring.boot>3.4.2</mybatis.plus.spring.boot>
+        <ml.toolkit.version>1.0.0.develop.version</ml.toolkit.version>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +57,24 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.spring.boot}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ml.toolkit</groupId>
+                <artifactId>ml-toolkit-common</artifactId>
+                <version>${ml.toolkit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ml.toolkit</groupId>
+                <artifactId>ml-toolkit-mybatis-plus</artifactId>
+                <version>${ml.toolkit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ml.toolkit</groupId>
+                <artifactId>ml-toolkit-form</artifactId>
+                <version>${ml.toolkit.version}</version>
             </dependency>
 
         </dependencies>
