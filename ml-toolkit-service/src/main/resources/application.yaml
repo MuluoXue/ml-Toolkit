@@ -15,4 +15,3 @@ mybatis-plus:
 logging:
   level:
     com.ml: info
-
