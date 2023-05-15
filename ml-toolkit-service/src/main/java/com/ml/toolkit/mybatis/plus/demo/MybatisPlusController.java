@@ -21,6 +21,9 @@ public class MybatisPlusController {
     @Resource
     private DemoDao demoDao;
 
+    @Resource
+    private DemoService demoService;
+
     @RequestMapping("/test")
     public void test() {
         List<Demo> list = new ArrayList<>();
@@ -36,5 +39,13 @@ public class MybatisPlusController {
         for (List<Demo> demoList : partition) {
             demoDao.insertBatchSomeColumn(demoList);
         }
+    }
+
+    @RequestMapping("/sqlInterceptor")
+    public void sqlInterceptor() {
+        Demo demo = new Demo();
+        demo.setGender(1);
+        // 自定义方法插入,执行分片
+        demoService.save(demo);
     }
 }
