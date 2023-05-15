@@ -7,6 +7,8 @@ It is easier to use coding, reduce the underlying workload, and can better serve
 
 -- ml-toolkit-common: the underlying package
 
--- ml-toolkit-mybatisl-plus: used by mybatis-plus
+-- ml-toolkit-form: form
+
+-- ml-toolkit-mybatis-plus: used by mybatis-plus
 
 -- ml-toolkit-service: demo
