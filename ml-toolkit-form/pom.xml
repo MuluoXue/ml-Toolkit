@@ -13,15 +13,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>ml.toolkit</groupId>
             <artifactId>ml-toolkit-mybatis-plus</artifactId>
-            <version>1.0.0.develop.version</version>
         </dependency>
 
         <dependency>
             <groupId>ml.toolkit</groupId>
             <artifactId>ml-toolkit-common</artifactId>
-            <version>1.0.0.develop.version</version>
         </dependency>
 
         <dependency>

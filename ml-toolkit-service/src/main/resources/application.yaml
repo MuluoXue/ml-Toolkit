@@ -8,7 +8,7 @@ spring:
 
 #  配置xml 所在的路径
 mybatis-plus:
-  mapper-locations: classpath*:com/ml/**/dao/**/*.xml
+  mapper-locations: classpath*:com/ml/toolkit/**/dao/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 

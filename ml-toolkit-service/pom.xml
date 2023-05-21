@@ -31,20 +31,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>ml.toolkit</groupId>
-            <artifactId>ml-toolkit-mybatis-plus</artifactId>
-            <version>1.0.0.develop.version</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ml.toolkit</groupId>
-            <artifactId>ml-toolkit-common</artifactId>
-            <version>1.0.0.develop.version</version>
+            <artifactId>ml-toolkit-form</artifactId>
         </dependency>
 
     </dependencies>
