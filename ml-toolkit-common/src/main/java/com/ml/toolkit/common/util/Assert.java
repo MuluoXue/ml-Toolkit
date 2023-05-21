@@ -1,6 +1,5 @@
-package com.ml.toolkit.common.common;
+package com.ml.toolkit.common.util;
 
-import com.ml.toolkit.common.util.ObjectUtil;
 
 import java.io.Serializable;
 
