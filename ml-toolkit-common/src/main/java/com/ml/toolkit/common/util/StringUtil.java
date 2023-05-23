@@ -23,4 +23,12 @@ public class StringUtil {
     public static boolean isEmpty(CharSequence str) {
         return null == str || str.length() == 0;
     }
+
+    /**
+     * 判断字符串是否为空
+     * @return true: 不为空 false:为空
+     */
+    public static boolean isNotEmpty(CharSequence str) {
+        return !isEmpty(str);
+    }
 }
