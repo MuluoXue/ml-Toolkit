@@ -1,6 +1,6 @@
-package com.ml.toolkit.form.service;
+package com.ml.toolkit.form.service.form.table;
 
-import com.ml.toolkit.form.domain.FormTable;
+import com.ml.toolkit.form.domain.form.table.FormTable;
 import com.ml.toolkit.mybatis.plus.base.BaseService;
 
 /**

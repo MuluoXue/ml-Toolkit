@@ -1,5 +1,6 @@
-package com.ml.toolkit.form.domain;
+package com.ml.toolkit.form.domain.form;
 
+import com.ml.toolkit.form.domain.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -9,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Form extends BaseEntity{
+public class Form extends BaseEntity {
 
     private static final long serialVersionUID = -7883088166454023696L;
 

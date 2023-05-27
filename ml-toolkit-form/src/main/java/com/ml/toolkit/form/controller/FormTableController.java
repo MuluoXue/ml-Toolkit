@@ -1,7 +1,7 @@
 package com.ml.toolkit.form.controller;
 
 import com.ml.toolkit.common.result.Result;
-import com.ml.toolkit.form.service.FormTableService;
+import com.ml.toolkit.form.service.form.table.FormTableService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

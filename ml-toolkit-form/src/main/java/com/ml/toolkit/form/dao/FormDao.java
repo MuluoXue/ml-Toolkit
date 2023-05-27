@@ -1,6 +1,6 @@
 package com.ml.toolkit.form.dao;
 
-import com.ml.toolkit.form.domain.Form;
+import com.ml.toolkit.form.domain.form.Form;
 import com.ml.toolkit.mybatis.plus.base.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 

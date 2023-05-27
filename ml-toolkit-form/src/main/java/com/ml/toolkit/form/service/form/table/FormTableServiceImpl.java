@@ -1,12 +1,11 @@
-package com.ml.toolkit.form.service;
+package com.ml.toolkit.form.service.form.table;
 
 import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.form.dao.FormTableDao;
-import com.ml.toolkit.form.domain.FormTable;
+import com.ml.toolkit.form.domain.form.table.FormTable;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -19,6 +18,7 @@ public class FormTableServiceImpl extends BaseServiceImpl<FormTableDao, FormTabl
     @Resource
     private FormTableDao formTableDao;
 
+    @Transactional
     @Override
     public void createBaseFormTable(String physicsName) {
         Assert.notEmpty("physicsName is Empty", physicsName);

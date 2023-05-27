@@ -1,4 +1,4 @@
-package com.ml.toolkit.form.domain;
+package com.ml.toolkit.form.domain.base;
 
 import lombok.Data;
 
