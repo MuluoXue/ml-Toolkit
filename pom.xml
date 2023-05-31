@@ -22,6 +22,7 @@
         <module>ml-toolkit-mybatis-plus</module>
         <module>ml-toolkit-service</module>
         <module>ml-toolkit-form</module>
+        <module>ml-toolkit-sql-conversion</module>
     </modules>
 
     <properties>
