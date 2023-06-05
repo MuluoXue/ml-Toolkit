@@ -23,6 +23,8 @@
         <module>ml-toolkit-service</module>
         <module>ml-toolkit-form</module>
         <module>ml-toolkit-sql-conversion</module>
+        <module>ml-toolkit-log</module>
+        <module>ml-toolkit-bean</module>
     </modules>
 
     <properties>
@@ -69,6 +71,12 @@
             <dependency>
                 <groupId>ml.toolkit</groupId>
                 <artifactId>ml-toolkit-common</artifactId>
+                <version>${ml.toolkit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ml.toolkit</groupId>
+                <artifactId>ml-toolkit-bean</artifactId>
                 <version>${ml.toolkit.version}</version>
             </dependency>
 
