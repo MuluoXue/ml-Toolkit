@@ -1,10 +1,8 @@
-package com.toolkit.bean.employee;
+package com.ml.toolkit.bean.employee;
 
-import com.toolkit.bean.base.BaseEntity;
+import com.ml.toolkit.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

@@ -1,4 +1,4 @@
-package com.toolkit.bean.base;
+package com.ml.toolkit.bean.base;
 
 import lombok.Data;
 

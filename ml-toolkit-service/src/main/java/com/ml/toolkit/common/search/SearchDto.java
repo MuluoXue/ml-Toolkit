@@ -14,6 +14,8 @@ public class SearchDto implements Serializable {
 
     private static final long serialVersionUID = -2131511112724274399L;
 
+
+
    private List<SearchParam> paramList;
 
    private String condition;

@@ -92,6 +92,12 @@
                 <version>${ml.toolkit.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>ml.toolkit</groupId>
+                <artifactId>ml-toolkit-log</artifactId>
+                <version>${ml.toolkit.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

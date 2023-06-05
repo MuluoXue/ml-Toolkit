@@ -9,10 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ml-toolkit-service</artifactId>
-    <packaging>war</packaging>
+    <artifactId>ml-toolkit-log</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -20,26 +24,30 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>ml.toolkit</groupId>
+            <artifactId>ml-toolkit-common</artifactId>
         </dependency>
 
         <dependency>
             <groupId>ml.toolkit</groupId>
-            <artifactId>ml-toolkit-form</artifactId>
+            <artifactId>ml-toolkit-bean</artifactId>
         </dependency>
 
         <dependency>
             <groupId>ml.toolkit</groupId>
-            <artifactId>ml-toolkit-log</artifactId>
+            <artifactId>ml-toolkit-mybatis-plus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>5.1.7.RELEASE</version>
         </dependency>
 
     </dependencies>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
 </project>
