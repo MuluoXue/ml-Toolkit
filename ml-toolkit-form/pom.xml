@@ -28,9 +28,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>ml.toolkit</groupId>
+            <artifactId>ml-toolkit-bean</artifactId>
         </dependency>
+
     </dependencies>
 
     <properties>

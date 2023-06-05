@@ -1,6 +1,6 @@
 package com.ml.toolkit.form.domain.form.table;
 
-import com.ml.toolkit.form.domain.base.BaseEntity;
+import com.toolkit.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
