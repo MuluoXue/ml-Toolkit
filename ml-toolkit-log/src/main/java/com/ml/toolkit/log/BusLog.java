@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 @Target({ElementType.METHOD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MlBusLog {
+public @interface BusLog {
     /**
      * 功能名称
      * @return 名称

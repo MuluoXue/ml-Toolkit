@@ -1,6 +1,7 @@
 package com.ml.toolkit.log.aop;
 
-import com.ml.toolkit.log.MlBusLog;
+import com.ml.toolkit.common.util.ObjectUtil;
+import com.ml.toolkit.log.BusLog;
 import com.ml.toolkit.log.dao.MlLogDao;
 import com.ml.toolkit.log.domain.MlLog;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ import java.util.Objects;
 @Aspect
 @Slf4j
 @Component
-public class MlBusLogAop implements Ordered {
+public class BusLogAop implements Ordered {
 
     @Resource
     private MlLogDao mlLogDao;
@@ -35,7 +36,7 @@ public class MlBusLogAop implements Ordered {
     /**
      * 定义BusLogAop的切入点为标记@BusLog注解的方法
      */
-    @Pointcut(value = "@annotation(com.ml.toolkit.log.MlBusLog)")
+    @Pointcut(value = "@annotation(com.ml.toolkit.log.BusLog)")
     public void pointcut() {
 
     }
@@ -54,15 +55,25 @@ public class MlBusLogAop implements Ordered {
         Object target = pjp.getTarget();
         //获取方法上的描述
         MethodSignature signature = (MethodSignature) pjp.getSignature();
-        MlBusLog targetLog = target.getClass().getAnnotation(MlBusLog.class);
-        MlBusLog signatureLog = signature.getMethod().getAnnotation(MlBusLog.class);
+        BusLog targetLog = target.getClass().getAnnotation(BusLog.class);
+
+        BusLog signatureLog = signature.getMethod().getAnnotation(BusLog.class);
         MlLog mlLog = new MlLog();
         String logName = targetLog.name();
         String logDescribe = signatureLog.describe();
-        mlLog.setName(logName);
+        mlLog.setLogName(logName);
         mlLog.setLogDescribe(logDescribe);
-        mlLog.setCreateTime(new Date());
+        mlLog.setOperateTime(new Date());
         mlLog.setPath(pjp.getTarget().getClass().getName() + "." + signature.getMethod().getName());
+
+        Object[] args = pjp.getArgs();
+        if(ObjectUtil.isNotEmpty(args)){
+            Object arg = args[args.length - 1];
+            if (arg instanceof String) {
+                mlLog.setOperator((String) arg);
+            }
+        }
+
 
         // 获取当前请求的 HttpServletRequest,需要引入spring-boot-stater-web包
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
