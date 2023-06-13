@@ -14,5 +14,5 @@ public @interface BusLog {
      * 功能描述
      * @return 功能描述
      */
-    String describe() default "";
+    String functionName() default "";
 }

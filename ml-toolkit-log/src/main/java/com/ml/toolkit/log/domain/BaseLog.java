@@ -1,14 +1,12 @@
 package com.ml.toolkit.log.domain;
 
-import com.ml.toolkit.bean.base.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class MlLog implements Serializable {
+public class BaseLog implements Serializable {
 
     private static final long serialVersionUID = 4362507095422731994L;
 
@@ -17,9 +15,10 @@ public class MlLog implements Serializable {
      */
     private Long id;
 
-    private String operator;
-
-    private Date operateTime;
+    /**
+     * 操作类型
+     */
+    private String type;
 
     /**
      * 日志名称
@@ -27,17 +26,22 @@ public class MlLog implements Serializable {
     private String logName;
 
     /**
-     * 日志描述、方法描述
+     * 方法名称
      */
-    private String  logDescribe;
-
-    /**
-     * 来源ip
-     */
-    private String ip;
+    private String  functionName;
 
     /**
      * 日志记录方法路径
      */
-    private String path;
+    private String functionPath;
+
+    /**
+     * 操作人
+     */
+    private String operator;
+
+    /**
+     * 操作时间
+     */
+    private Date operateTime;
 }

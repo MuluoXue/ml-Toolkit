@@ -17,7 +17,7 @@
 //import java.util.Properties;
 //
 ///**
-// * mybatis-plus 自定义拦截器
+// * mybatis 自定义拦截器
 // * @author ml
 // * @date 2023-05-15
 // */

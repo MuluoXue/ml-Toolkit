@@ -2,8 +2,8 @@ package com.ml.toolkit.log.aop;
 
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.log.BusLog;
-import com.ml.toolkit.log.dao.MlLogDao;
-import com.ml.toolkit.log.domain.MlLog;
+import com.ml.toolkit.log.dao.BaseLogDao;
+import com.ml.toolkit.log.domain.BaseLog;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,13 +12,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.Objects;
 
 @Aspect
 @Slf4j
@@ -26,7 +22,7 @@ import java.util.Objects;
 public class BusLogAop implements Ordered {
 
     @Resource
-    private MlLogDao mlLogDao;
+    private BaseLogDao baseLogDao;
 
     @Override
     public int getOrder() {
@@ -55,33 +51,34 @@ public class BusLogAop implements Ordered {
         Object target = pjp.getTarget();
         //获取方法上的描述
         MethodSignature signature = (MethodSignature) pjp.getSignature();
+        //类名注解
         BusLog targetLog = target.getClass().getAnnotation(BusLog.class);
 
+        //方法注解
         BusLog signatureLog = signature.getMethod().getAnnotation(BusLog.class);
-        MlLog mlLog = new MlLog();
-        String logName = targetLog.name();
-        String logDescribe = signatureLog.describe();
-        mlLog.setLogName(logName);
-        mlLog.setLogDescribe(logDescribe);
-        mlLog.setOperateTime(new Date());
-        mlLog.setPath(pjp.getTarget().getClass().getName() + "." + signature.getMethod().getName());
 
+        BaseLog mlBaseLog = new BaseLog();
+        mlBaseLog.setLogName(targetLog.name());
+        mlBaseLog.setFunctionName(signatureLog.functionName());
+        mlBaseLog.setOperateTime(new Date());
+        mlBaseLog.setFunctionPath(pjp.getTarget().getClass().getName() + "." + signature.getMethod().getName());
+
+        // 获取当前操作人, 默认最后一个参数是当前操作人
         Object[] args = pjp.getArgs();
         if(ObjectUtil.isNotEmpty(args)){
             Object arg = args[args.length - 1];
             if (arg instanceof String) {
-                mlLog.setOperator((String) arg);
+                mlBaseLog.setOperator((String) arg);
             }
         }
 
-
         // 获取当前请求的 HttpServletRequest,需要引入spring-boot-stater-web包
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        // 获取客户端 IP 地址
-        mlLog.setIp(request.getRemoteAddr());
+//        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+//        // 获取客户端 IP 地址
+//        mlLog.setIp(request.getRemoteAddr());
 
         //保存业务操作日志信息
-        this.mlLogDao.insert(mlLog);
+        this.baseLogDao.insert(mlBaseLog);
         log.info("----BusAop 环绕通知 end");
 
         return result;

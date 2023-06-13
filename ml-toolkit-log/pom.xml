@@ -18,10 +18,10 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>ml.toolkit</groupId>
@@ -36,11 +36,6 @@
         <dependency>
             <groupId>ml.toolkit</groupId>
             <artifactId>ml-toolkit-mybatis-plus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>5.1.7.RELEASE</version>
         </dependency>
 
     </dependencies>
