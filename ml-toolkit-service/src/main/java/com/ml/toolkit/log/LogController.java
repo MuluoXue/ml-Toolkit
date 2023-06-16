@@ -18,7 +18,9 @@ public class LogController {
         Demo demo = new Demo();
         demo.setName("666");
 //        demoService.insert(demo, "ml");
-
-        demoService.saveTableName();
+        for (int i = 0; i < 1000; i++) {
+            demoService.saveTableName();
+        }
+        System.out.println("==========================");
     }
 }

@@ -6,6 +6,7 @@ import com.ml.toolkit.log.domain.BaseLog;
 import com.ml.toolkit.log.domain.LogContext;
 import com.ml.toolkit.log.service.BaseLogService;
 import com.ml.toolkit.log.service.LogContextService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ public class LogContextServiceImpl implements LogContextService {
     @Resource
     private BaseLogService baseLogService;
 
+    @Async
     @Override
     public void saveLog(LogContext logContext) {
         BaseLog mlBaseLog = new BaseLog();
