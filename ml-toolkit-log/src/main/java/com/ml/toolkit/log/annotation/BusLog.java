@@ -1,4 +1,4 @@
-package com.ml.toolkit.log;
+package com.ml.toolkit.log.annotation;
 
 import java.lang.annotation.*;
 

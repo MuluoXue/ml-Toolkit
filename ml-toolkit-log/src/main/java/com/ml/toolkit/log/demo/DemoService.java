@@ -7,4 +7,6 @@ public interface DemoService {
 
     void insert(Demo demo, String operator);
 
+    void saveTableName();
+
 }

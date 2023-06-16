@@ -17,6 +17,8 @@ public class LogController {
     public void insert() {
         Demo demo = new Demo();
         demo.setName("666");
-        demoService.insert(demo, "ml");
+//        demoService.insert(demo, "ml");
+
+        demoService.saveTableName();
     }
 }

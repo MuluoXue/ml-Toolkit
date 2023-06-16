@@ -1,7 +1,7 @@
 package com.ml.toolkit.log.aop;
 
 import com.ml.toolkit.common.util.ObjectUtil;
-import com.ml.toolkit.log.BusLog;
+import com.ml.toolkit.log.annotation.BusLog;
 import com.ml.toolkit.log.dao.BaseLogDao;
 import com.ml.toolkit.log.domain.BaseLog;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class BusLogAop implements Ordered {
     /**
      * 定义BusLogAop的切入点为标记@BusLog注解的方法
      */
-    @Pointcut(value = "@annotation(com.ml.toolkit.log.BusLog)")
+    @Pointcut(value = "@annotation(com.ml.toolkit.log.annotation.BusLog)")
     public void pointcut() {
 
     }

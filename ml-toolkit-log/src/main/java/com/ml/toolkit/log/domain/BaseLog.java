@@ -18,7 +18,7 @@ public class BaseLog implements Serializable {
     /**
      * 操作类型
      */
-    private String type;
+    private String operateType;
 
     /**
      * 日志名称
