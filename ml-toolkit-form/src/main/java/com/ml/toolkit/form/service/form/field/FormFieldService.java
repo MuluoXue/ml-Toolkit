@@ -1,7 +1,6 @@
 package com.ml.toolkit.form.service.form.field;
 
 import com.ml.toolkit.form.domain.FormField;
-import com.ml.toolkit.form.domain.form.table.FormTable;
 import com.ml.toolkit.form.dto.form.field.FormFieldDto;
 import com.ml.toolkit.form.exception.FormException;
 import com.ml.toolkit.mybatis.plus.base.BaseService;

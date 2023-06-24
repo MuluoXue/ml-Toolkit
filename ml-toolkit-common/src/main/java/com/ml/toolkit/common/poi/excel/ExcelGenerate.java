@@ -2,13 +2,11 @@ package com.ml.toolkit.common.poi.excel;
 
 import com.ml.toolkit.common.poi.excel.annotation.ExcelCell;
 import com.ml.toolkit.common.poi.excel.annotation.ExcelData;
-import com.ml.toolkit.common.util.ObjectUtil;
-import lombok.Data;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -48,7 +46,7 @@ public class ExcelGenerate implements Serializable {
         }
     }
 
-    public void addBatchRow(List<Object> list) throws IllegalAccessException {
+    public <T>void addBatchRow(List<T> list) throws IllegalAccessException {
         //组装数据
         Object o = list.get(0);
         Class<?> aClass = o.getClass();
@@ -77,7 +75,6 @@ public class ExcelGenerate implements Serializable {
                 }
             }
         }
-
     }
 
     private Row addRow() {

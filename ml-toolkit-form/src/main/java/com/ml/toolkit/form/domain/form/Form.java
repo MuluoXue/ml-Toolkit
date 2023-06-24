@@ -14,5 +14,9 @@ public class Form extends BaseEntity {
 
     private static final long serialVersionUID = -7883088166454023696L;
 
+    /**
+     * 表单名称
+     */
     private String name;
+
 }

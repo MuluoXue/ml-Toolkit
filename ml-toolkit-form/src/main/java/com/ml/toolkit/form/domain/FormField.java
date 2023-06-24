@@ -9,7 +9,13 @@ import lombok.EqualsAndHashCode;
 public class FormField extends BaseEntity {
     private static final long serialVersionUID = -5949839660728403782L;
 
+    /**
+     * 字段名称
+     */
     private String name;
 
+    /**
+     * 表单ID
+     */
     private Long formId;
 }
