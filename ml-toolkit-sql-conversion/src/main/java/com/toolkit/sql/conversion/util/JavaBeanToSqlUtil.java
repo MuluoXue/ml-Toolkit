@@ -4,10 +4,7 @@ import com.ml.toolkit.common.util.ObjectUtil;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class JavaBeanToSqlUtil implements Serializable {
 
@@ -25,6 +22,7 @@ public class JavaBeanToSqlUtil implements Serializable {
         if (ObjectUtil.isEmpty(tableName)) {
             tableName = aClass.getSimpleName();
         }
+        tableName = tableName.toLowerCase(Locale.ROOT);
 
         List<Field> list = new ArrayList<>();
         while (aClass != null) {
@@ -33,7 +31,7 @@ public class JavaBeanToSqlUtil implements Serializable {
         }
 
         if (ObjectUtil.isNotEmpty(list)) {
-            StringBuilder createSql = new StringBuilder("CREATE TABLE `demo_log`\n" +
+            StringBuilder createSql = new StringBuilder("CREATE TABLE `" + tableName + "`\n" +
                     "(\n");
             for (Field declaredField : list) {
                 createSql.append(fileToSql(declaredField));
@@ -53,7 +51,13 @@ public class JavaBeanToSqlUtil implements Serializable {
         }
         field.setAccessible(true);
 
-        return "`" + field.getName() + "` " + findType(field.getType()) + " DEFAULT NULL COMMENT '',\n";
+        return "`" + convertFileName(field.getName()) + "` " + findType(field.getType()) + " DEFAULT NULL COMMENT '',\n";
+    }
+
+    private static String convertFileName(String input) {
+        String regex = "([a-z])([A-Z]+)";
+        String replacement = "$1_$2";
+        return input.replaceAll(regex, replacement).toLowerCase();
     }
 
     private static String findType(Class<?> type) {

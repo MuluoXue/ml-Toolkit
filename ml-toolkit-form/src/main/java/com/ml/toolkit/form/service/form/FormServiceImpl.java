@@ -20,21 +20,12 @@ import java.util.Date;
 @Service
 public class FormServiceImpl extends BaseServiceImpl<FormDao, Form> implements FormService {
 
-
-    @Resource
-    private FormFieldService formFieldService;
-
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void saveForm(FormDto dto) {
-        Assert.notEmpty("params is empty", dto.getName());
-        Form form = new Form();
+    public void saveForm(Form form) {
+        Assert.notEmpty("params is empty", form.getName());
         form.setId(LongIdGenerator.generate());
-        form.setName(dto.getName());
         form.setCreateTime(new Date());
         this.save(form);
-
-        //创建表单字段
-        formFieldService.batchSave(dto.getFormFieldList(), form.getId());
     }
 }

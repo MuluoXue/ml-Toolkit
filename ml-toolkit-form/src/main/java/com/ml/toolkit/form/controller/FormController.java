@@ -19,8 +19,8 @@ public class FormController {
     @Resource
     private FormService formService;
 
-    @RequestMapping("/saveForm")
-    public Result saveForm(@RequestBody FormDto form) {
+    @RequestMapping("/save")
+    public Result save(@RequestBody Form form) {
         formService.saveForm(form);
         return Result.success();
     }

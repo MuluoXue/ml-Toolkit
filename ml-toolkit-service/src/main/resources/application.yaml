@@ -5,6 +5,11 @@ spring:
     name: ml-toolkit-service
   profiles:
     include: develop
+  mvc:
+    view:
+      prefix: /WEB-INF/content/
+      suffix: .jsp
+
 
 #  配置xml 所在的路径
 mybatis-plus:
