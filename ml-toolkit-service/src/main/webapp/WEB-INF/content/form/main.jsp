@@ -62,15 +62,8 @@
     <div class="layui-side layui-bg-black j_lay_ui_menu_left">
         <div class="layui-side-scroll j_all_menu">
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a>表单管理</a>
-                    <dl class="layui-nav-child">
-                        <dd class="j_menu"><a href="javascript:;">表单列表</a></dd>
-                        <dd class="j_menu"><a href="javascript:;">新建表单</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="j_menu" attr_href="/static/page/apply.html"> 费用申请单(大陆)</a>
+                <li class="layui-nav-item layui-nav-itemed js_family_menu" family_href="/static/page/form/formList.html">
+                    <a>表单列表</a>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="j_menu" attr_href="/static/page/hk/reimbursement.html">费用报销单(香港)</a>
@@ -93,6 +86,7 @@
     </div>
 </div>
 
+<script src ="../../../static/js/api.js"></script>
 <script>
     layui.use(["jquery","familyMenu"],function(){
         var familyMenu = layui.familyMenu;

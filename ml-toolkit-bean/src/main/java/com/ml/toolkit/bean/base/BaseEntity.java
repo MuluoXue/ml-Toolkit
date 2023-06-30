@@ -1,5 +1,7 @@
 package com.ml.toolkit.bean.base;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +16,7 @@ public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 8604755723878533734L;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private Date createTime;

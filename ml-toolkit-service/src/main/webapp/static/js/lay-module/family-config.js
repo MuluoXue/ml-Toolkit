@@ -9,5 +9,5 @@ layui.config({
 }).extend({
     familyMenu: "family-menu",
     familyPage: "family-page",
-    familyModel: "family-model"
+    familyRequest: "family-request"
 });
