@@ -1,6 +1,6 @@
 package sql.conversion;
 
-import com.ml.toolkit.form.domain.form.Form;
+import com.ml.toolkit.form.domain.data.FormDataDetail;
 import com.toolkit.sql.conversion.util.JavaBeanToSqlUtil;
 import org.junit.Test;
 
@@ -12,6 +12,6 @@ public class JavaBeanToSqlDemo implements Serializable {
 
     @Test
     public void toSql() {
-        System.out.println(JavaBeanToSqlUtil.toCreateSql(new Form(), null));
+        System.out.println(JavaBeanToSqlUtil.toCreateSql(new FormDataDetail(), null));
     }
 }

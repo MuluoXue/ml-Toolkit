@@ -29,7 +29,9 @@
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        <button type="submit" class="layui-btn layui-btn-primary" lay-submit
+                                lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                        </button>
                     </div>
                 </div>
             </form>
@@ -38,10 +40,10 @@
 
     <table class="layui-hide" id="js_form_table" lay-filter="family_form_table_filter"/>
 
-    <script type="text/html" id="toolbarDemo">
+    <script type="text/html" id="js_form_toolbar">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-            <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+            <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+            <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除</button>
         </div>
     </script>
 
@@ -51,6 +53,7 @@
     <div class="layui-clear-space">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-xs" lay-event="fieldList">字段列表</a>
+        <a class="layui-btn layui-btn-xs" lay-event="dataList">数据列表</a>
         <a class="layui-btn layui-btn-xs" lay-event="more">
             更多
             <i class="layui-icon layui-icon-down"></i>
@@ -61,13 +64,14 @@
 <script>
     layui.use(['table', 'dropdown', 'familyRequest', 'familyPage'], function () {
         const table = layui.table,
+            $ = layui.$,
             familyRequest = layui.familyRequest;
 
         const dropdown = layui.dropdown;
 
         table.render({
             elem: '#js_form_table',
-            toolbar: '#toolbarDemo',
+            toolbar: '#js_form_toolbar',
             url: window.form.apiUrl.list,
             response: {
                 statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
@@ -100,9 +104,8 @@
                     type: 1,
                     area: ['80%', '80%'],
                     content: content,
-                    end: function() {
-                        table.reload('js_form_table', {
-                        }, 'data');
+                    end: function () {
+                        table.reload('js_form_table', {}, 'data');
                     }
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
@@ -126,13 +129,21 @@
                     content: content
                 });
             } else if (obj.event === 'fieldList') {
+                window.form_id = data.id;
                 let content = familyRequest.getHrefContent(window.form.field.htmlUrl.list);
                 layer.open({
                     title: '字段列表 - form-id:' + data.id,
                     type: 1,
                     area: ['80%', '80%'],
-                    content: content
+                    content: content,
+                    end: function () {
+                        window.form_id = null;
+                    }
                 });
+            } else if (obj.event === 'dataList') {
+                window.form_id = data.id;
+                let content = familyRequest.getHrefContent(window.form.data.htmlUrl.list);
+                $("body").find(".j_lay_ui_body .j_lay_ui_content").html(content);
             } else if (obj.event === 'more') {
                 // 更多 - 下拉菜单
                 dropdown.render({
@@ -145,14 +156,16 @@
                         title: '删除',
                         id: 'del'
                     }],
-                    click: function (menudata) {
-                        if (menudata.id === 'detail') {
+                    click: function (menuData) {
+                        if (menuData.id === 'detail') {
                             layer.msg('查看操作，当前行 ID:' + data.id);
-                        } else if (menudata.id === 'del') {
+                        } else if (menuData.id === 'del') {
                             layer.confirm('真的删除行 [id: ' + data.id + '] 么', function (index) {
-                                obj.del(); // 删除对应行（tr）的DOM结构
-                                layer.close(index);
-                                // 向服务端发送删除指令
+                                familyRequest.request({url: window.form.apiUrl.deleteById + "/" + data.id}, function (params) {
+                                    layer.msg(params?.message);
+                                    obj.del(); // 删除对应行（tr）的DOM结构
+                                    layer.close(index);
+                                })
                             });
                         }
                     },

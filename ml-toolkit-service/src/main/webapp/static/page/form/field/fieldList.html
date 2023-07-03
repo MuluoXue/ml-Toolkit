@@ -5,10 +5,13 @@
 <script>
     layui.use(['table', 'dropdown', 'familyRequest', 'familyPage'], function () {
         const table = layui.table;
-
         table.render({
             elem: '#js_form_field_table',
             url: window.form.field.apiUrl.list,
+            method: "post",
+            contentType: "application/json",
+            dataType: "json",
+            where: {formId: window.form_id},
             response: {
                 statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
             },

@@ -10,7 +10,7 @@ layui.define(["jquery"], function (exports) {
                 url: this.getUrl(options.url),
                 type: 'post',
                 contentType: "application/json",
-                data: JSON.stringify(options.param),
+                data: options?.param ? JSON.stringify(options.param) : "",
                 async: true,
                 success: function (data) {
                     if (data?.code !== 200) {

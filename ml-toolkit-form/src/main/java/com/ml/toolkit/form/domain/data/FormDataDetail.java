@@ -10,5 +10,9 @@ public class FormDataDetail extends BaseEntity {
 
     private static final long serialVersionUID = -8565805993593287469L;
 
+    private Long dataId;
 
+    private Long fieldId;
+
+    private String content;
 }

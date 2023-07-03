@@ -20,6 +20,9 @@ import java.util.Date;
 @Service
 public class FormServiceImpl extends BaseServiceImpl<FormDao, Form> implements FormService {
 
+    @Resource
+    private FormDao formDao;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveForm(Form form) {

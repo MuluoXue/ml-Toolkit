@@ -1,11 +1,10 @@
 package com.ml.toolkit.form.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ml.toolkit.common.result.Result;
 import com.ml.toolkit.form.domain.form.Form;
-import com.ml.toolkit.form.dto.form.FormDto;
 import com.ml.toolkit.form.service.form.FormService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,5 +30,11 @@ public class FormController {
     public Result list() {
         List<Form> list = formService.list();
         return Result.success(list);
+    }
+
+    @RequestMapping("/deleteById/{id}")
+    public Result deleteById(@PathVariable("id") Long id) {
+        formService.removeById(id);
+        return Result.success();
     }
 }
