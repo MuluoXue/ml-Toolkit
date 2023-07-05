@@ -1,5 +1,6 @@
 package com.ml.toolkit.form.domain.data;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.ml.toolkit.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,6 +14,7 @@ public class FormData extends BaseEntity {
 
     private Long formId;
 
+    @TableField(exist = false)
     private List<FormDataDetail> formDataDetailList;
 
 }

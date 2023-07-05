@@ -27,10 +27,15 @@ public class FormDataSearchServiceImpl implements FormDataSearchService {
         Map<String,Object> formDataParam = new HashMap<>();
         formDataParam.put("form_id", formData.getFormId());
         List<FormData> formDataList = formDataService.listByMap(formDataParam);
-        if (ObjectUtil.isNotEmpty(formDataList)) {
-            List<FormDataDetail> formDataDetails = formDataDetailService.listByFormDataIds(ListUtil.listToList(formDataList, FormData::getId));
-        }
 
-        return null;
+        Map<String, Object> result = new HashMap<>();
+        result.put("formDataList", formDataList);
+        if (ObjectUtil.isNotEmpty(formDataList)) {
+            List<FormDataDetail> formDataDetails = formDataDetailService.listByFormDataIdList(ListUtil.listToList(formDataList, FormData::getId));
+            if (ObjectUtil.isNotEmpty(formDataDetails)) {
+                result.put("formDataDetails", formDataDetails);
+            }
+        }
+        return result;
     }
 }

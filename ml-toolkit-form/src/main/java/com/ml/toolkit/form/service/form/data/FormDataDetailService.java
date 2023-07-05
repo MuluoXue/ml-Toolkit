@@ -12,5 +12,5 @@ public interface FormDataDetailService extends BaseService<FormDataDetail> {
 
     void saveBatchData(List<FormDataDetail> list, Long dataId);
 
-    List<FormDataDetail> listByFormDataIds(List<Long> formDataIds);
+    List<FormDataDetail> listByFormDataIdList(List<Long> formDataIds);
 }

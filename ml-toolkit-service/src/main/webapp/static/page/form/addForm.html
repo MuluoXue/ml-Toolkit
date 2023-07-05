@@ -7,39 +7,41 @@
                        class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
-            </div>
-        </div>
     </form>
+    <div class="layui-input-block">
+        <button  class="layui-btn js_form_submit" lay-submit lay-filter="submit">立即提交</button>
+        <button  class="layui-btn layui-btn-primary">Reset</button>
+    </div>
 </div>
 <script>
     layui.use(['form',"familyRequest"], function(){
         const form = layui.form;
         const layer = layui.layer;
-        const request =layui.familyRequest;
+        const request =layui.familyRequest,
+            $ = layui.$;
 
         // 当前弹出层，防止ID被覆盖
         var parentIndex = layer.index;
 
-        // 提交事件
-        form.on('submit(submit)', function(data){
-            const field = data.field; // 获取表单字段值
-            // 此处可执行 Ajax 等操作
-            request.request({url: window.form.apiUrl.save, param:field}, function(data) {
-                layer.alert(JSON.stringify(data));
-                if (parentIndex) {
-                    layer.close(parentIndex);
-                } else {
-                    form.val('js_add_form_val_filter', {
-                        name:""
-                    });
-                }
+        $('.js_form_submit').on('click', function(){
+            // 提交事件
+            form.submit('js_add_form_val_filter', function(data){
+                const field = data.field; // 获取表单字段值
+                console.log(field)
+                // 此处可执行 Ajax 等操作
+                request.request({url: window.form.apiUrl.save, param:field}, function(data) {
+                    layer.alert(JSON.stringify(data));
+                    if (parentIndex) {
+                        layer.close(parentIndex);
+                    } else {
+                        form.val('js_add_form_val_filter', {
+                            name:""
+                        });
+                    }
 
-            })
-            return false; // 阻止默认 form 跳转
+                })
+                return false; // 阻止默认 form 跳转
+            });
         });
     });
 </script>

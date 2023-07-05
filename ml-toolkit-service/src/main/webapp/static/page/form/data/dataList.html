@@ -40,7 +40,7 @@
                         "code": res.code, //解析接口状态
                         "msg": res.message, //解析提示文本
                         // "count": res.total, //解析数据长度
-                        "data": res.data //解析数据列表
+                        "data": renderTableData(res.data) //解析数据列表
                     };
                 },
                 cols: [cols],
@@ -56,7 +56,7 @@
                 layer.open({
                     title: '添加数据',
                     type: 1,
-                    area: ['100%', '100%'],
+                    area: ['80%', '80%'],
                     content: content,
                     end: function () {
                         table.reload('js_form_data_table', {}, 'data');
@@ -70,5 +70,26 @@
         });
 
     });
+
+    renderTableData = function (data) {
+        let dataList = [];
+        let resultData = {};
+        data?.formDataDetails.forEach(function (formData) {
+            const fieldId = formData.fieldId;
+            const dataId = formData.dataId;
+            if (resultData[dataId]) {
+                resultData[dataId][fieldId] = formData.content;
+            } else {
+                resultData[dataId] = {[fieldId]:formData.content };
+            }
+        })
+        const objKeys = Object.keys(resultData);
+        objKeys.forEach(function (key) {
+            var resultDatum = resultData[key];
+            resultDatum.id = key;
+            dataList.push(resultDatum);
+        })
+        return dataList;
+    }
 
 </script>

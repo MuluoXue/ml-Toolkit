@@ -8,11 +8,15 @@ import com.ml.toolkit.form.service.form.data.FormDataDetailService;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class FormDataDetailServiceImpl extends BaseServiceImpl<FormDataDetailDao, FormDataDetail> implements FormDataDetailService {
+
+    @Resource
+    private FormDataDetailDao formDataDetailDao;
 
     @Override
     public void saveBatchData(List<FormDataDetail> list, Long dataId) {
@@ -27,8 +31,11 @@ public class FormDataDetailServiceImpl extends BaseServiceImpl<FormDataDetailDao
     }
 
     @Override
-    public List<FormDataDetail> listByFormDataIds(List<Long> formDataIds) {
-        return null;
+    public List<FormDataDetail> listByFormDataIdList(List<Long> formDataIds) {
+        if (ObjectUtil.isEmpty(formDataIds)) {
+            return null;
+        }
+        return formDataDetailDao.listByDataIdList(formDataIds);
     }
 
 

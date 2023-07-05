@@ -1,48 +1,58 @@
 <div class="js_form_data_detail" style="border:1px solid red; padding: 20px">
-    <form class="layui-form" lay-filter="js_form_data_val_filter">
-        <div class="layui-form-item">
-            <label class="layui-form-label">表单名称</label>
-            <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
-            </div>
-        </div>
-    </form>
+    <form class="layui-form js_form_data_form" lay-filter="js_form_data_val_filter"></form>
+    <div class="layui-input-block">
+        <button class="layui-btn js_form_data_submit" lay-submit lay-filter="submit">立即提交</button>
+        <button class="layui-btn layui-btn-primary">Reset</button>
+    </div>
 </div>
+
+
 <script>
     layui.use(['form', "familyRequest", 'familyFormField'], function () {
         const form = layui.form;
         const layer = layui.layer;
         const request = layui.familyRequest,
-            familyFormField = layui.familyFormField;
+            familyFormField = layui.familyFormField,
+            $ = layui.$;
 
-        familyFormField.renderHtml();
+        const $el = $(".js_form_data_form");
+
+        request.request({url: window.form.field.apiUrl.list, param: {formId: window.form_id}}, function (data) {
+            const formHtml = familyFormField.renderHtml(data.data);
+            $el.html(formHtml);
+            $el.append($("#js_form_data_form_submit").html());
+        });
 
         // 当前弹出层，防止ID被覆盖
         const parentIndex = layer.index;
 
-        // 提交事件
-        form.on('submit(submit)', function (data) {
-            const field = data.field; // 获取表单字段值
-            // 此处可执行 Ajax 等操作
-            request.request({url: window.form.apiUrl.save, param: field}, function (data) {
-                layer.alert(JSON.stringify(data));
-                if (parentIndex) {
-                    layer.close(parentIndex);
-                } else {
-                    form.val('js_form_data_val_filter', {
-                        name: ""
-                    });
-                }
-
-            })
-            return false; // 阻止默认 form 跳转
+        $('.js_form_data_submit').on('click', function () {
+            // 提交事件
+            form.submit('js_form_data_val_filter', function (data) {
+                const field = data.field; // 获取表单字段值
+                // 此处可执行 Ajax 等操作
+                request.request({url: window.form.data.apiUrl.save, param: renderFormData(field)}, function(data) {
+                    layer.alert(JSON.stringify(data));
+                    if (parentIndex) {
+                        layer.close(parentIndex);
+                    }
+                })
+                return false; // 阻止默认 form 跳转
+            });
         });
     });
+
+    renderFormData = function (field) {
+        let formDataDetail = [];
+        if (field) {
+            const objKeys = Object.keys(field);
+            objKeys.forEach(function (key) {
+                formDataDetail.push({fieldId: key, content: field[key]});
+            })
+        }
+        return {
+            formId: window.form_id,
+            formDataDetailList: formDataDetail
+        }
+    }
 </script>
