@@ -18,7 +18,7 @@ layui.define(["jquery"], function (exports) {
                 html += field.name;
                 html += '</label> <div class="layui-input-block"><input type="text" name="';
                 html += field.id;
-                html += '" lay-verify="required" placeholder="请输入" autoComplete="off" class="layui-input"> </div></div>';
+                html += '" placeholder="请输入" autoComplete="off" class="layui-input"> </div></div>';
             })
             return html;
         }

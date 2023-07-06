@@ -15,4 +15,6 @@ import java.util.List;
 public interface FormDataDetailDao extends BaseDao<FormDataDetail> {
 
     List<FormDataDetail> listByDataIdList(@Param("dataIdList") List<Long> dataIdList);
+
+    void deleteByFormDataIds(@Param("dataIdList") List<Long> idList);
 }

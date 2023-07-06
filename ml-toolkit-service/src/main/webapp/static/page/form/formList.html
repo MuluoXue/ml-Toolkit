@@ -97,6 +97,7 @@
          * toolbar事件监听
          */
         table.on('toolbar(family_form_table_filter)', function (obj) {
+            var id = obj.config.id;
             if (obj.event === 'add') {   // 监听添加操作
                 let content = familyRequest.getHrefContent(window.form.htmlUrl.addForm);
                 layer.open({
@@ -109,9 +110,9 @@
                     }
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
-                // var checkStatus = table.checkStatus('currentTableId')
-                //     , data = checkStatus.data;
-                // layer.alert(JSON.stringify(data));
+                var getData = table.getData(id);
+                console.log(getData);
+                layer.alert(layui.util.escape(JSON.stringify(getData)));
             }
         });
 

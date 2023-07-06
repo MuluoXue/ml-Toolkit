@@ -9,4 +9,11 @@
             #{id}
         </foreach>
     </select>
+
+    <delete id="deleteByFormDataIds">
+        delete from form_data_detail where data_id in
+        <foreach collection="dataIdList" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

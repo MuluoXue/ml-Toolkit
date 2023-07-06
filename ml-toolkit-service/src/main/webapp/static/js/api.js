@@ -11,7 +11,7 @@ window.form = {
     field: {
         apiUrl: {
             save: "/form/field/save",
-            list: "/form/field/list"
+            list: '/form/field/list'
         },
         htmlUrl: {
             list: "/static/page/form/field/fieldList.html",
@@ -21,7 +21,9 @@ window.form = {
     data: {
         apiUrl: {
             save: '/form/data/save',
-            list: '/form/data/list'
+            list: '/form/data/list',
+            deleteByIds: '/form/data/deleteByIds',
+            findFormDataAndField: '/form/data/findFormDataAndField'
         },
         htmlUrl: {
             list: '/static/page/form/data/dataList.html',

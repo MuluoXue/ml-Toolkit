@@ -38,5 +38,8 @@ public class FormDataDetailServiceImpl extends BaseServiceImpl<FormDataDetailDao
         return formDataDetailDao.listByDataIdList(formDataIds);
     }
 
-
+    @Override
+    public void deleteByFormDataIds(List<Long> idList) {
+        formDataDetailDao.deleteByFormDataIds(idList);
+    }
 }

@@ -17,10 +17,26 @@
 
         const $el = $(".js_form_data_form");
 
-        request.request({url: window.form.field.apiUrl.list, param: {formId: window.form_id}}, function (data) {
-            const formHtml = familyFormField.renderHtml(data.data);
+        request.request({url: window.form.data.apiUrl.findFormDataAndField, param: {formId: window.form_id, dataId: window.edit_form_data_id}}, function (data) {
+            const formHtml = familyFormField.renderHtml(data.data.formFieldList);
             $el.html(formHtml);
             $el.append($("#js_form_data_form_submit").html());
+
+            // if (window.edit_form_data_id) {
+            //     request.request({url: window.form..apiUrl.list, param: {dataId: window.edit_form_data_id}}, function (data) {
+            //
+            //
+            //         form.val('js_form_data_val_filter', {
+            //             "username": "贤心", // "name": "value"
+            //             "password": "AAAAAA",
+            //             "interest": 1,
+            //             "like[write]": true, // 复选框选中状态
+            //             "close": true, // 开关状态
+            //             "sex": "女",
+            //             "desc": "Layui 用于更简单快速地构建网页界面"
+            //         });
+            //     });
+            // }
         });
 
         // 当前弹出层，防止ID被覆盖

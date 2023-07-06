@@ -4,8 +4,9 @@
 
 <script type="text/html" id="js_form_data_toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除</button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add"> 添加</button>
+        <button type="button" class="layui-btn layui-btn-sm" lay-event="edit">编辑</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"> 删除</button>
     </div>
 </script>
 
@@ -51,6 +52,10 @@
          * toolbar事件监听
          */
         table.on('toolbar(family_form_data_table_filter)', function (obj) {
+            const id = obj.config.id;
+            const selectDaaList = table.checkStatus(id);
+            const dataList = selectDaaList?.data;
+
             if (obj.event === 'add') {   // 监听添加操作
                 let content = familyRequest.getHrefContent(window.form.data.htmlUrl.addFormData);
                 layer.open({
@@ -62,10 +67,48 @@
                         table.reload('js_form_data_table', {}, 'data');
                     }
                 });
+            } else if (obj.event === 'edit') {
+                if (dataList.length === 0) {
+                    return layer.msg("请选择数据");
+                }
+                if (dataList.length > 1) {
+                    return layer.msg("只能选择一条数据");
+                }
+
+                window.edit_form_data_id = dataList[0].id;
+                let content = familyRequest.getHrefContent(window.form.data.htmlUrl.addFormData);
+                layer.open({
+                    title: '修改数据' + window.edit_form_data_id,
+                    type: 1,
+                    area: ['80%', '80%'],
+                    content: content,
+                    end: function () {
+                        window.edit_form_data_id = null;
+                        table.reload('js_form_data_table', {formId: window.form_id});
+                    }
+                });
             } else if (obj.event === 'delete') {  // 监听删除操作
-                // var checkStatus = table.checkStatus('currentTableId')
-                //     , data = checkStatus.data;
-                // layer.alert(JSON.stringify(data));
+                if (dataList.length === 0) {
+                    return layer.msg("请选择数据");
+                }
+                layer.confirm('确定删除吗？', function (index) {
+                    let ids = [];
+                    dataList.forEach(function (data) {
+                        ids.push(data.id);
+                    })
+                    // 向服务端发送删除指令
+                    familyRequest.request({
+                        url: window.form.data.apiUrl.deleteByIds,
+                        param: {ids: ids}
+                    }, function (data) {
+                        layer.msg(data?.message);
+                        //重载
+                        table.reload('js_form_data_table', {
+                            where: {formId: window.form_id},
+                        });
+                    })
+                    layer.close(index);
+                });
             }
         });
 
@@ -74,18 +117,19 @@
     renderTableData = function (data) {
         let dataList = [];
         let resultData = {};
-        data?.formDataDetails.forEach(function (formData) {
+
+        data?.formDataDetails?.forEach(function (formData) {
             const fieldId = formData.fieldId;
             const dataId = formData.dataId;
             if (resultData[dataId]) {
                 resultData[dataId][fieldId] = formData.content;
             } else {
-                resultData[dataId] = {[fieldId]:formData.content };
+                resultData[dataId] = {[fieldId]: formData.content};
             }
         })
         const objKeys = Object.keys(resultData);
         objKeys.forEach(function (key) {
-            var resultDatum = resultData[key];
+            const resultDatum = resultData[key];
             resultDatum.id = key;
             dataList.push(resultDatum);
         })
