@@ -37,14 +37,22 @@ public class FormDataServiceImpl extends BaseServiceImpl<FormDataDao, FormData> 
      * @param entity formData
      */
     @Override
-    public void saveData(FormData entity) {
-        FormData formData = new FormData();
-        formData.setId(LongIdGenerator.generate());
-        formData.setFormId(entity.getFormId());
-        formData.setCreateTime(new Date());
-        this.save(formData);
+    public void saveData(FormDataDto dto) {
+        //修改
+        if (ObjectUtil.isNotEmpty(dto.getDataId())) {
+            formDataDetailService.saveBatchData(dto.getFormDataDetailList(), dto.getDataId());
+            // 新增
+        } else {
+            FormData formData = new FormData();
+            formData.setId(LongIdGenerator.generate());
+            formData.setFormId(dto.getFormId());
+            formData.setCreateTime(new Date());
+            this.save(formData);
 
-        formDataDetailService.saveBatchData(entity.getFormDataDetailList(), formData.getId());
+            formDataDetailService.saveBatchData(dto.getFormDataDetailList(), formData.getId());
+        }
+
+
     }
 
     @Transactional

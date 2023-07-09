@@ -9,6 +9,7 @@ import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class FormDataDetailServiceImpl extends BaseServiceImpl<FormDataDetailDao
 
     @Override
     public void saveBatchData(List<FormDataDetail> list, Long dataId) {
+        //先删除，在新增
+        this.deleteByFormDataIds(Collections.singletonList(dataId));
+
         if (ObjectUtil.isNotEmpty(list)) {
             for (FormDataDetail formDataDetail : list) {
                 formDataDetail.setDataId(dataId);

@@ -18,7 +18,7 @@
         familyRequest.request({url: window.form.field.apiUrl.list, param: {formId: window.form_id}}, function (data) {
             const dataList = data.data;
             let cols = [{type: 'checkbox', fixed: 'left'},
-                {field: 'id', fixed: 'left', title: 'ID', sort: true}];
+                {field: 'id', fixed: 'left', title: 'ID', sort: true, hide: true}];
 
             dataList.forEach(function (field) {
                 cols.push({field: field.id, title: field.name});

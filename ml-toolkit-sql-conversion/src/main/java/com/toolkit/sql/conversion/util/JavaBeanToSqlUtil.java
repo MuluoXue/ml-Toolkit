@@ -25,10 +25,8 @@ public class JavaBeanToSqlUtil implements Serializable {
         tableName = tableName.toLowerCase(Locale.ROOT);
 
         List<Field> list = new ArrayList<>();
-        while (aClass != null) {
-            list.addAll(Arrays.asList(aClass.getDeclaredFields()));
-            aClass = aClass.getSuperclass();
-        }
+        list.addAll(getField(aClass.getSuperclass(), true));
+        list.addAll(getField(aClass, false));
 
         if (ObjectUtil.isNotEmpty(list)) {
             StringBuilder createSql = new StringBuilder("CREATE TABLE `" + tableName + "`\n" +
@@ -44,6 +42,15 @@ public class JavaBeanToSqlUtil implements Serializable {
         return tableName;
     }
 
+    private static List<Field> getField(Class<?> aClass, boolean containParent ) {
+        List<Field> list = new ArrayList<>();
+        if (aClass != null && containParent) {
+            list.addAll(Arrays.asList(aClass.getDeclaredFields()));
+            getField(aClass.getSuperclass(), containParent);
+        }
+        return list;
+    }
+
     private static String fileToSql(Field field) {
         String name = field.getName();
         if ("serialVersionUID".equals(name)) {
@@ -51,7 +58,11 @@ public class JavaBeanToSqlUtil implements Serializable {
         }
         field.setAccessible(true);
 
-        return "`" + convertFileName(field.getName()) + "` " + findType(field.getType()) + " DEFAULT NULL COMMENT '',\n";
+        return "`" + convertFileName(field.getName()) + "` " + findType(field.getType()) + findIsNull(field.getName()) + " COMMENT '',\n";
+    }
+
+    private static String findIsNull(String name) {
+        return "id".equalsIgnoreCase(name) ? " NOT NULL" : " DEFAULT NULL";
     }
 
     private static String convertFileName(String input) {

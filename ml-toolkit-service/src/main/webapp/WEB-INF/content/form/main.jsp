@@ -15,6 +15,10 @@
     <!-- 引入 layui.js -->
     <script src="../../../static/layui/layui.js"></script>
     <script src ="../../../static/js/lay-module/family-config.js"></script>
+
+    <!-- 校验js -->
+    <script src ="../../../static/js/xiaomo/validator.umd.js"></script>
+
 </head>
 
 <body>
@@ -65,8 +69,9 @@
                 <li class="layui-nav-item layui-nav-itemed js_family_menu" family_href="/static/page/form/formList.html">
                     <a>表单列表</a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="j_menu" attr_href="/static/page/hk/reimbursement.html">费用报销单(香港)</a>
+                <li class="layui-nav-item layui-nav-itemed js_family_menu"
+                    family_href="/static/page/user/register.html">
+                    <a>注册用户</a>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="j_menu" attr_href="/static/page/hk/apply.html"> 费用申请单(香港)</a>
@@ -88,6 +93,9 @@
 
 <script src ="../../../static/js/api.js"></script>
 <script>
+    //dsj校验方法
+    validator.default.localize(window.validatorMsg);
+
     layui.use(["jquery","familyMenu"],function(){
         var familyMenu = layui.familyMenu;
         familyMenu.render({

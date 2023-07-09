@@ -27,7 +27,6 @@
             // 提交事件
             form.submit('js_add_form_val_filter', function(data){
                 const field = data.field; // 获取表单字段值
-                console.log(field)
                 // 此处可执行 Ajax 等操作
                 request.request({url: window.form.apiUrl.save, param:field}, function(data) {
                     layer.alert(JSON.stringify(data));

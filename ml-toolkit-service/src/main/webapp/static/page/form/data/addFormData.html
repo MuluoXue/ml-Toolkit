@@ -17,26 +17,23 @@
 
         const $el = $(".js_form_data_form");
 
-        request.request({url: window.form.data.apiUrl.findFormDataAndField, param: {formId: window.form_id, dataId: window.edit_form_data_id}}, function (data) {
-            const formHtml = familyFormField.renderHtml(data.data.formFieldList);
+        request.request({
+            url: window.form.data.apiUrl.findFormDataAndField,
+            param: {formId: window.form_id, dataId: window.edit_form_data_id}
+        }, function (data) {
+            const formHtml = familyFormField.renderHtml(data.data?.formFieldList);
             $el.html(formHtml);
             $el.append($("#js_form_data_form_submit").html());
 
-            // if (window.edit_form_data_id) {
-            //     request.request({url: window.form..apiUrl.list, param: {dataId: window.edit_form_data_id}}, function (data) {
-            //
-            //
-            //         form.val('js_form_data_val_filter', {
-            //             "username": "贤心", // "name": "value"
-            //             "password": "AAAAAA",
-            //             "interest": 1,
-            //             "like[write]": true, // 复选框选中状态
-            //             "close": true, // 开关状态
-            //             "sex": "女",
-            //             "desc": "Layui 用于更简单快速地构建网页界面"
-            //         });
-            //     });
-            // }
+            if (window.edit_form_data_id && data.data?.formData) {
+                const formData = data.data.formData;
+                const detailList = formData.formDataDetailList;
+                let formDVal = {};
+                detailList.forEach(function (item) {
+                    formDVal[item.fieldId] = item.content;
+                })
+                form.val('js_form_data_val_filter', formDVal);
+            }
         });
 
         // 当前弹出层，防止ID被覆盖
@@ -47,18 +44,25 @@
             form.submit('js_form_data_val_filter', function (data) {
                 const field = data.field; // 获取表单字段值
                 // 此处可执行 Ajax 等操作
-                request.request({url: window.form.data.apiUrl.save, param: renderFormData(field)}, function(data) {
+                request.request({
+                    url: window.form.data.apiUrl.save,
+                    param: {
+                        formId: window.form_id,
+                        dataId: window.edit_form_data_id,
+                        formDataDetailList: renderFormDataDetail(field),
+                    }
+                }, function (data) {
                     layer.alert(JSON.stringify(data));
                     if (parentIndex) {
                         layer.close(parentIndex);
                     }
-                })
+                });
                 return false; // 阻止默认 form 跳转
             });
         });
     });
 
-    renderFormData = function (field) {
+    renderFormDataDetail = function (field) {
         let formDataDetail = [];
         if (field) {
             const objKeys = Object.keys(field);
@@ -66,9 +70,6 @@
                 formDataDetail.push({fieldId: key, content: field[key]});
             })
         }
-        return {
-            formId: window.form_id,
-            formDataDetailList: formDataDetail
-        }
+        return formDataDetail;
     }
 </script>

@@ -1,0 +1,100 @@
+<div class="js_user_register">
+    <form class="layui-form" lay-filter="js_user_register_val_filter">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="account" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码确认</label>
+            <div class="layui-input-block">
+                <input type="text" name="two_password" lay-verify="required" placeholder="请输入密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+    <div class="layui-input-block">
+        <button class="layui-btn js_register_submit" lay-submit lay-filter="submit">注册</button>
+    </div>
+</div>
+
+<script>
+    layui.use(['form', "familyRequest"], function () {
+        const form = layui.form;
+        const layer = layui.layer;
+        const request = layui.familyRequest,
+            $ = layui.$;
+
+        // 当前弹出层，防止ID被覆盖
+        var parentIndex = layer.index;
+
+        $('.js_register_submit').on('click', function () {
+            // 提交事件
+            form.submit('js_user_register_val_filter', function (data) {
+                const field = data.field;
+                // 获取表单字段值
+                let result = false;
+                request.request({url: window.user.register.apiUrl.register, param: field}, function (data) {
+                    layer.msg(data.message);
+                    if (parentIndex) {
+                        layer.close(parentIndex);
+                    }
+                })
+                // 阻止默认 form 跳转
+                return false;
+            });
+        });
+
+        // let checkInfo = function (data,result) {
+        //     validator.default.validate([
+        //         {
+        //             dataKey: "account",
+        //             value: data.account,
+        //             label: "账号",
+        //             rules: "required|email"
+        //         },
+        //         {
+        //             dataKey: "password",
+        //             value: data.password,
+        //             label: '密码',
+        //             rules: "required"
+        //         },
+        //         {
+        //             dataKey: "two_password",
+        //             value: data.two_password,
+        //             label: '二次密码',
+        //             rules: "required|confirmed:password"
+        //         }
+        //     ],{
+        //         checkAll: false
+        //     }).then(() => {
+        //         result = true;
+        //     }).catch((error) => {
+        //         const objKeys = Object.keys(error);
+        //         let errorMsgList = [];
+        //         objKeys.forEach(function (key) {
+        //             errorMsgList.push(error[key]);
+        //         })
+        //         layer.msg(errorMsgList[0]);
+        //     });
+        // }
+    });
+
+
+</script>

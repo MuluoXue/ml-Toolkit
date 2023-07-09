@@ -40,6 +40,11 @@
         </dependency>
 
         <dependency>
+            <groupId>ml.toolkit</groupId>
+            <artifactId>ml-toolkit-user</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
         </dependency>

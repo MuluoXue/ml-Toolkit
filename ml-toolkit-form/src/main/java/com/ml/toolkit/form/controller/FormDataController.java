@@ -26,8 +26,8 @@ public class FormDataController {
     private FormDataService formDataService;
 
     @RequestMapping("/save")
-    public Result save(@RequestBody FormData formData) {
-        formDataService.saveData(formData);
+    public Result save(@RequestBody FormDataDto dto) {
+        formDataService.saveData(dto);
         return Result.success();
     }
 

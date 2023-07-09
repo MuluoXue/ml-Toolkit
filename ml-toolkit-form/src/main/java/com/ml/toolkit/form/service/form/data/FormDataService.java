@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface FormDataService extends BaseService<FormData> {
 
-    void saveData(FormData formData);
+    void saveData(FormDataDto dto);
 
     void deleteByIds(List<Long> ids);
 

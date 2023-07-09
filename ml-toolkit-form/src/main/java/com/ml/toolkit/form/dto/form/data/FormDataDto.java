@@ -1,5 +1,6 @@
 package com.ml.toolkit.form.dto.form.data;
 
+import com.ml.toolkit.form.domain.data.FormDataDetail;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +15,8 @@ public class FormDataDto implements Serializable {
     private Long dataId;
 
     private List<Long> ids;
+
+    private List<FormDataDetail> formDataDetailList;
 
 
 }

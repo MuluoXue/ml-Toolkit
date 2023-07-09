@@ -25,6 +25,7 @@
         <module>ml-toolkit-sql-conversion</module>
         <module>ml-toolkit-log</module>
         <module>ml-toolkit-bean</module>
+        <module>ml-toolkit-user</module>
     </modules>
 
     <properties>
@@ -101,6 +102,12 @@
             <dependency>
                 <groupId>ml.toolkit</groupId>
                 <artifactId>ml-toolkit-sql-conversion</artifactId>
+                <version>${ml.toolkit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ml.toolkit</groupId>
+                <artifactId>ml-toolkit-user</artifactId>
                 <version>${ml.toolkit.version}</version>
             </dependency>
 
