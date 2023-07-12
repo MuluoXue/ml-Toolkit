@@ -1,5 +1,6 @@
 package com.ml.toolkit.form.service.form.data.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.form.dao.data.FormDataDetailDao;
@@ -9,6 +10,7 @@ import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.sql.Wrapper;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -39,11 +41,15 @@ public class FormDataDetailServiceImpl extends BaseServiceImpl<FormDataDetailDao
         if (ObjectUtil.isEmpty(formDataIds)) {
             return null;
         }
-        return formDataDetailDao.listByDataIdList(formDataIds);
+        QueryWrapper<FormDataDetail> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(FormDataDetail::getDataId,formDataIds);
+        return this.list(wrapper);
     }
 
     @Override
     public void deleteByFormDataIds(List<Long> idList) {
-        formDataDetailDao.deleteByFormDataIds(idList);
+        QueryWrapper<FormDataDetail> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(FormDataDetail::getDataId,idList);
+        this.remove(wrapper);
     }
 }

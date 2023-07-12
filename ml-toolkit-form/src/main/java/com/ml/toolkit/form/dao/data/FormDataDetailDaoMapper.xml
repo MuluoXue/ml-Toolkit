@@ -3,17 +3,4 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ml.toolkit.form.dao.data.FormDataDetailDao">
 
-    <select id="listByDataIdList" resultType="com.ml.toolkit.form.domain.data.FormDataDetail">
-        select * from form_data_detail where data_id in
-        <foreach collection="dataIdList" open="(" close=")" item="id" separator=",">
-            #{id}
-        </foreach>
-    </select>
-
-    <delete id="deleteByFormDataIds">
-        delete from form_data_detail where data_id in
-        <foreach collection="dataIdList" open="(" close=")" item="id" separator=",">
-            #{id}
-        </foreach>
-    </delete>
 </mapper>
