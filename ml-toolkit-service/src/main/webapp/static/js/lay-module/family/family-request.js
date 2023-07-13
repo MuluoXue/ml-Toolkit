@@ -12,7 +12,34 @@ layui.define(["jquery"], function (exports) {
                 contentType: "application/json",
                 data: options?.param ? JSON.stringify(options.param) : "",
                 async: true,
+                headers: {
+                    "Bearer": window.localStorage.getItem('mlToken')
+                },
                 success: function (data) {
+                    if (data?.code !== 200) {
+                        layer.msg(data?.message);
+                    } else {
+                        successFunction(data);
+                    }
+                },
+                error: function (xhr) {
+                    return layer.msg('Status:' + xhr.status + '，' + xhr.statusText + '，请稍后再试！');
+                }
+            });
+        },
+        requestLogin: function (options, successFunction) {
+            $.ajax({
+                url: this.getUrl(options.url),
+                type: 'post',
+                contentType: "application/json",
+                data: options?.param ? JSON.stringify(options.param) : "",
+                async: true,
+                success: function (data, status,xhr) {
+                    //获取服务端自定义的header信息
+                    const token = xhr.getResponseHeader('Authorization');
+                    if (token) {
+                        window.localStorage.setItem('mlToken',token)
+                    }
                     if (data?.code !== 200) {
                         layer.msg(data?.message);
                     } else {

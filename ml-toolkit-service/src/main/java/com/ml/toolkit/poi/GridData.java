@@ -25,16 +25,19 @@ public class GridData {
     /**
      * 投入总资金
      */
+    @ExcelCell
     private double totalInvestment;
 
     /**
      * 单笔资金
      */
+    @ExcelCell
     private double singleFund;
 
     /**
      * 单笔盈利
      */
+    @ExcelCell
     private double singleProfit;
 
 }

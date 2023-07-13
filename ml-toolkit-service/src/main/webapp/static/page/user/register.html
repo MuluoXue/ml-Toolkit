@@ -50,6 +50,8 @@
                 const field = data.field;
                 // 获取表单字段值
                 let result = false;
+
+
                 request.request({url: window.user.register.apiUrl.register, param: field}, function (data) {
                     layer.msg(data.message);
                     if (parentIndex) {

@@ -1,4 +1,4 @@
-package com.ml.toolkit.user.exception;
+package com.ml.toolkit.exception.sys;
 
 import com.ml.toolkit.common.result.BaseResultCode;
 

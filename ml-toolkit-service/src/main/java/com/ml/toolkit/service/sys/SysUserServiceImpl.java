@@ -1,12 +1,12 @@
-package com.ml.toolkit.user.service;
+package com.ml.toolkit.service.sys;
 
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.ObjectUtil;
+import com.ml.toolkit.dao.sys.SysUserDao;
+import com.ml.toolkit.domain.sys.SysUser;
+import com.ml.toolkit.exception.sys.UserException;
+import com.ml.toolkit.exception.sys.UserResultCode;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
-import com.ml.toolkit.user.dao.SysUserDao;
-import com.ml.toolkit.user.domain.SysUser;
-import com.ml.toolkit.user.exception.UserException;
-import com.ml.toolkit.user.exception.UserResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

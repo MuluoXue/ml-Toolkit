@@ -1,8 +1,9 @@
-package com.ml.toolkit.user.controller;
+package com.ml.toolkit.controller.sys;
 
 import com.ml.toolkit.common.result.Result;
-import com.ml.toolkit.user.domain.SysUser;
-import com.ml.toolkit.user.service.SysUserService;
+import com.ml.toolkit.domain.sys.SysUser;
+import com.ml.toolkit.jwt.JwtTokenUtil;
+import com.ml.toolkit.service.sys.SysUserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,20 +20,20 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/sys/login")
 public class LoginController {
 
-//    @Value("${jwt.tokenHeader}")
-//    private String tokenHeader;
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
 
     @Resource
     private SysUserService userService;
 
-//    @Resource
-//    private JwtTokenUtil jwtTokenUtil;
+    @Resource
+    private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping("/login")
     public Result login(@RequestBody SysUser user, HttpServletResponse response){
         SysUser sysUser = userService.login(user);
-//        String token = jwtTokenUtil.findAccessToken(sysUser);
-//        response.addHeader(tokenHeader, token);
+        String token = jwtTokenUtil.findAccessToken(sysUser);
+        response.addHeader(tokenHeader, token);
         return Result.success();
     }
 }

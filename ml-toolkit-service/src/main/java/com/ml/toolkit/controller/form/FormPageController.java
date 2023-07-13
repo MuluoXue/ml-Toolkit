@@ -1,11 +1,11 @@
-package com.ml.toolkit.form.controller;
+package com.ml.toolkit.controller.form;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/form/formPage")
+@RequestMapping("/form/page")
 public class FormPageController {
 
     @RequestMapping("/mainPage")

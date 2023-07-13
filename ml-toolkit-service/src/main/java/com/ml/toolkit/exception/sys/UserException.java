@@ -1,4 +1,4 @@
-package com.ml.toolkit.user.exception;
+package com.ml.toolkit.exception.sys;
 
 public class UserException extends RuntimeException {
 
@@ -9,6 +9,7 @@ public class UserException extends RuntimeException {
     public UserException(UserResultCode resultCode) {
         this.resultCode = resultCode;
     }
+
     public UserResultCode getResultCode() {
         return resultCode;
     }

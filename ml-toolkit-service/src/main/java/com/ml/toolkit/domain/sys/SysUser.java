@@ -1,9 +1,12 @@
-package com.ml.toolkit.user.domain;
+package com.ml.toolkit.domain.sys;
 
 import com.ml.toolkit.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author ml
@@ -18,16 +21,20 @@ public class SysUser extends BaseEntity {
     /**
      * 名称
      */
+    @NotNull
     private String name;
 
     /**
      *  账号
      */
+    @NotNull
+    @Email
     private String account;
 
     /**
      * 密码
      */
+    @NotNull
     private String password;
 
     /**

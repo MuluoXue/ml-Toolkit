@@ -1,7 +1,7 @@
-package com.ml.toolkit.user.dao;
+package com.ml.toolkit.dao.sys;
 
 import com.ml.toolkit.mybatis.plus.base.BaseDao;
-import com.ml.toolkit.user.domain.SysUser;
+import com.ml.toolkit.domain.sys.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

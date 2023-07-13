@@ -97,7 +97,7 @@
     validator.default.localize(window.validatorMsg);
 
     layui.use(["jquery","familyMenu"],function(){
-        var familyMenu = layui.familyMenu;
+        const familyMenu = layui.familyMenu;
         familyMenu.render({
             parentEl:"body"
         })

@@ -1,7 +1,7 @@
-package com.ml.toolkit.user.service;
+package com.ml.toolkit.service.sys;
 
+import com.ml.toolkit.domain.sys.SysUser;
 import com.ml.toolkit.mybatis.plus.base.BaseService;
-import com.ml.toolkit.user.domain.SysUser;
 
 /**
  * @author ml

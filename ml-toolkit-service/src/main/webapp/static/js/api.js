@@ -37,6 +37,11 @@ window.user = {
         apiUrl: {
             register: '/sys/user/register'
         }
+    },
+    login: {
+        apiUrl: {
+            login: '/sys/login/login'
+        }
     }
 }
 
