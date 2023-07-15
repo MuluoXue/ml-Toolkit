@@ -1,12 +1,12 @@
 package com.ml.toolkit.form.domain;
 
-import com.ml.toolkit.bean.base.BaseEntity;
+import com.ml.toolkit.form.domain.base.FormBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class FormField extends BaseEntity {
+public class FormField extends FormBaseEntity {
     private static final long serialVersionUID = -5949839660728403782L;
 
     /**

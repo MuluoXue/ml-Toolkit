@@ -4,7 +4,7 @@ import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.result.Result;
 import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.form.domain.FormField;
-import com.ml.toolkit.form.service.form.field.FormFieldService;
+import com.ml.toolkit.form.service.field.FormFieldService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,11 +1,9 @@
-package com.ml.toolkit.form.service.form;
+package com.ml.toolkit.form.service;
 
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.form.dao.form.FormDao;
 import com.ml.toolkit.form.domain.form.Form;
-import com.ml.toolkit.form.dto.form.FormDto;
-import com.ml.toolkit.form.service.form.field.FormFieldService;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +17,6 @@ import java.util.Date;
  */
 @Service
 public class FormServiceImpl extends BaseServiceImpl<FormDao, Form> implements FormService {
-
-    @Resource
-    private FormDao formDao;
 
     @Transactional(rollbackFor = Exception.class)
     @Override

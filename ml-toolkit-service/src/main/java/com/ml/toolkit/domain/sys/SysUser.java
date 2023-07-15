@@ -1,6 +1,5 @@
 package com.ml.toolkit.domain.sys;
 
-import com.ml.toolkit.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;

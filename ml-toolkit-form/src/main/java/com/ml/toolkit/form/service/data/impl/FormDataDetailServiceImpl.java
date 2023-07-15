@@ -1,16 +1,15 @@
-package com.ml.toolkit.form.service.form.data.impl;
+package com.ml.toolkit.form.service.data.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.form.dao.data.FormDataDetailDao;
 import com.ml.toolkit.form.domain.data.FormDataDetail;
-import com.ml.toolkit.form.service.form.data.FormDataDetailService;
+import com.ml.toolkit.form.service.data.FormDataDetailService;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;

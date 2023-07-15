@@ -1,4 +1,4 @@
-package com.ml.toolkit.bean.base;
+package com.ml.toolkit.domain.sys;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -20,5 +20,7 @@ public class BaseEntity implements Serializable {
     private Long id;
 
     private Date createTime;
+
+    private Date updateTime;
 
 }

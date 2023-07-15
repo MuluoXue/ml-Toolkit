@@ -1,4 +1,4 @@
-package com.ml.toolkit.form.service.form;
+package com.ml.toolkit.form.service;
 
 import com.ml.toolkit.form.domain.form.Form;
 import com.ml.toolkit.mybatis.plus.base.BaseService;

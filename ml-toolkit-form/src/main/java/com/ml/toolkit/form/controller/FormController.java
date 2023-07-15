@@ -2,7 +2,7 @@ package com.ml.toolkit.form.controller;
 
 import com.ml.toolkit.common.result.Result;
 import com.ml.toolkit.form.domain.form.Form;
-import com.ml.toolkit.form.service.form.FormService;
+import com.ml.toolkit.form.service.FormService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

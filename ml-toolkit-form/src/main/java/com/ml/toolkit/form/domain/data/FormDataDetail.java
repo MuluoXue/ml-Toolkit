@@ -2,13 +2,13 @@ package com.ml.toolkit.form.domain.data;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.ml.toolkit.bean.base.BaseEntity;
+import com.ml.toolkit.form.domain.base.FormBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class FormDataDetail extends BaseEntity {
+public class FormDataDetail extends FormBaseEntity {
 
     private static final long serialVersionUID = -8565805993593287469L;
 

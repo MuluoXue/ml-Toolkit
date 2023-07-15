@@ -9,6 +9,7 @@ import com.ml.toolkit.exception.sys.UserResultCode;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;

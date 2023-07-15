@@ -1,4 +1,4 @@
-package com.ml.toolkit.form.service.form.field;
+package com.ml.toolkit.form.service.field;
 
 import com.ml.toolkit.form.domain.FormField;
 import com.ml.toolkit.form.dto.form.field.FormFieldDto;

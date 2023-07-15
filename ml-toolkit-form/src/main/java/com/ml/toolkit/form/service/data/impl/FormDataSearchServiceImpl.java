@@ -1,12 +1,12 @@
-package com.ml.toolkit.form.service.form.data.impl;
+package com.ml.toolkit.form.service.data.impl;
 
 import com.ml.toolkit.common.collection.ListUtil;
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.form.domain.data.FormData;
 import com.ml.toolkit.form.domain.data.FormDataDetail;
-import com.ml.toolkit.form.service.form.data.FormDataDetailService;
-import com.ml.toolkit.form.service.form.data.FormDataSearchService;
-import com.ml.toolkit.form.service.form.data.FormDataService;
+import com.ml.toolkit.form.service.data.FormDataDetailService;
+import com.ml.toolkit.form.service.data.FormDataSearchService;
+import com.ml.toolkit.form.service.data.FormDataService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

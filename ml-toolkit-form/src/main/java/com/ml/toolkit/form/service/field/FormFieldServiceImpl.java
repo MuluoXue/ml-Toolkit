@@ -1,4 +1,4 @@
-package com.ml.toolkit.form.service.form.field;
+package com.ml.toolkit.form.service.field;
 
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.ObjectUtil;
