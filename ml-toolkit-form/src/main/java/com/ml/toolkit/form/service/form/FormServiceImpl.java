@@ -1,15 +1,13 @@
-package com.ml.toolkit.form.service;
+package com.ml.toolkit.form.service.form;
 
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.form.dao.form.FormDao;
 import com.ml.toolkit.form.domain.form.Form;
+import com.ml.toolkit.form.domain.sys.SimpleUser;
 import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * @author ml
@@ -20,10 +18,10 @@ public class FormServiceImpl extends BaseServiceImpl<FormDao, Form> implements F
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void saveForm(Form form) {
+    public void saveForm(Form form, SimpleUser user) {
         Assert.notEmpty("params is empty", form.getName());
         form.setId(LongIdGenerator.generate());
-        form.setCreateTime(new Date());
+        form.setCreator(user);
         this.save(form);
     }
 }

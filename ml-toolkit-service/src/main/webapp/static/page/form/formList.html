@@ -76,9 +76,7 @@
             response: {
                 statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
             },
-            headers: {
-                "Bearer": window.localStorage.getItem('mlToken')
-            },
+            headers: familyRequest.getHeaders(),
             // 将原始数据解析成 table 组件所规定的数据格式
             parseData: function (res) {
                 return {
@@ -135,15 +133,7 @@
             } else if (obj.event === 'fieldList') {
                 window.form_id = data.id;
                 let content = familyRequest.getHrefContent(window.form.field.htmlUrl.list);
-                layer.open({
-                    title: '字段列表 - form-id:' + data.id,
-                    type: 1,
-                    area: ['80%', '80%'],
-                    content: content,
-                    end: function () {
-                        window.form_id = null;
-                    }
-                });
+                $("body").find(".j_lay_ui_body .j_lay_ui_content").html(content);
             } else if (obj.event === 'dataList') {
                 window.form_id = data.id;
                 let content = familyRequest.getHrefContent(window.form.data.htmlUrl.list);

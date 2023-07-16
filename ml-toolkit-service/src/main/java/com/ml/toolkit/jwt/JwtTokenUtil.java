@@ -4,6 +4,7 @@ import com.ml.toolkit.common.exception.SysException;
 import com.ml.toolkit.common.result.ResultCode;
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.domain.sys.SysUser;
+import com.ml.toolkit.form.domain.sys.SimpleUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -39,7 +40,7 @@ public class JwtTokenUtil implements Serializable {
     /**
      * 生成Token
      */
-    public String findAccessToken(SysUser user){
+    public String findAccessToken(SysUser user) {
         // 登陆成功生成JWT
         return Jwts.builder()
                 // 放入用户名和用户ID
@@ -59,13 +60,27 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
-    public void parseToken(String token){
+    public void parseToken(String token) {
         try {
             Claims body = Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
             body.getSubject();
+        } catch (Exception e) {
+            throw new SysException(ResultCode.USER_NOT_LOGGED_IN);
+        }
+    }
+
+    public SimpleUser getCurrentUser(String token) {
+        try {
+            Claims body = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+            SimpleUser simpleUser = new SimpleUser();
+            simpleUser.setId(Long.parseLong(body.getId()));
+            return simpleUser;
         } catch (Exception e) {
             throw new SysException(ResultCode.USER_NOT_LOGGED_IN);
         }

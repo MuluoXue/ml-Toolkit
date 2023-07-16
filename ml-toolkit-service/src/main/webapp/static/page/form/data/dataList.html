@@ -15,7 +15,7 @@
         const table = layui.table,
             familyRequest = layui.familyRequest;
 
-        familyRequest.request({url: window.form.field.apiUrl.list, param: {formId: window.form_id}}, function (data) {
+        familyRequest.request({url: window.form.field.apiUrl.list, param: {form: {id:window.form_id}}}, function (data) {
             const dataList = data.data;
             let cols = [{type: 'checkbox', fixed: 'left'},
                 {field: 'id', fixed: 'left', title: 'ID', sort: true, hide: true}];
@@ -31,7 +31,8 @@
                 method: "post",
                 contentType: "application/json",
                 dataType: "json",
-                where: {formId: window.form_id},
+                headers: familyRequest.getHeaders(),
+                where: {form: {id:window.form_id}},
                 response: {
                     statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
                 },
@@ -113,6 +114,7 @@
         });
 
     });
+
 
     renderTableData = function (data) {
         let dataList = [];

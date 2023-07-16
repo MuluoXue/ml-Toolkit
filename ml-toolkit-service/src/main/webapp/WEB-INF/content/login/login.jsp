@@ -158,7 +158,7 @@
                 familyRequest.requestLogin({url: window.user.login.apiUrl.login, param: data}, function (params) {
                     layer.msg(params?.message);
                     window.location = '/form/page/mainPage';
-                })
+                },$('.js_login_submit'))
                 return false;
             });
         });

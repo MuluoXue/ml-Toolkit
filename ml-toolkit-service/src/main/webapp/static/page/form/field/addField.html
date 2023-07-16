@@ -1,47 +1,51 @@
-
 <div class="js_add_field">
-  <form class="layui-form" lay-filter="js_add_field_val_filter">
-    <div class="layui-form-item">
-      <label class="layui-form-label">所属表单ID</label>
-      <div class="layui-input-block">
-        <input type="text" name="formId" lay-verify="required" placeholder="请输入" autocomplete="off"
-               class="layui-input">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">字段名称</label>
-      <div class="layui-input-block">
-        <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off"
-               class="layui-input">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <div class="layui-input-block">
-        <button type="submit" class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+    <form class="layui-form" lay-filter="js_add_field_val_filter">
+        <div class="layui-form-item">
+            <label class="layui-form-label">字段名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+
+    <div class="layui-input-block">
+        <button type="submit" class="layui-btn js_form_field_submit" >立即提交</button>
         <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
-      </div>
     </div>
-  </form>
+
 </div>
 
 <script>
-  layui.use(['form',"familyRequest"], function(){
-    const form = layui.form;
-    const layer = layui.layer;
-    const request =layui.familyRequest;
+    layui.use(['form', "familyRequest"], function () {
+        const form = layui.form;
+        const layer = layui.layer;
+        const request = layui.familyRequest,
+        $=layui.$;
 
-    // 提交事件
-    form.on('submit(submit)', function(data){
-      const field = data.field; // 获取表单字段值
-      // 此处可执行 Ajax 等操作
-      request.request({url: window.form.field.url.apiUrl, param:field}, function(data) {
-        layer.alert(JSON.stringify(data));
-        form.val('js_add_form_val_filter', {
-          name:""
+        // 当前弹出层，防止ID被覆盖
+        const parentIndex = layer.index;
+
+
+        $('.js_form_field_submit').on('click', function () {
+            // 提交事件
+            form.submit('js_add_field_val_filter', function (data) {
+                const field = data.field; // 获取表单字段值
+                // 此处可执行 Ajax 等操作
+                request.request({
+                    url: window.form.field.apiUrl.save, param: {
+                        form: {id: window.form_id},
+                        ...field
+                    }
+                }, function (data) {
+                    layer.alert(JSON.stringify(data));
+                    if (parentIndex) {
+                        layer.close(parentIndex);
+                    }
+                })
+                return false; // 阻止默认 form 跳转
+            });
         });
-      })
-      return false; // 阻止默认 form 跳转
     });
-  });
 </script>
 

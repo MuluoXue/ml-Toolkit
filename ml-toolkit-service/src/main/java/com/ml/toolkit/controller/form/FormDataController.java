@@ -1,6 +1,7 @@
-package com.ml.toolkit.form.controller;
+package com.ml.toolkit.controller.form;
 
 import com.ml.toolkit.common.result.Result;
+import com.ml.toolkit.controller.BaseController;
 import com.ml.toolkit.form.domain.data.FormData;
 import com.ml.toolkit.form.dto.form.data.FormDataDto;
 import com.ml.toolkit.form.service.data.FormDataSearchService;
@@ -14,7 +15,9 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/form/data")
-public class FormDataController {
+public class FormDataController extends BaseController {
+
+    private static final long serialVersionUID = -6243208195005396836L;
 
     @Resource
     private FormDataSearchService formDataSearchService;
@@ -24,7 +27,7 @@ public class FormDataController {
 
     @RequestMapping("/save")
     public Result save(@RequestBody FormDataDto dto) {
-        formDataService.saveData(dto);
+        formDataService.saveData(dto, getCurrentUser());
         return Result.success();
     }
 

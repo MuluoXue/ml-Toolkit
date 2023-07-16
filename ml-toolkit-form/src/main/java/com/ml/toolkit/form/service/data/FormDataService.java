@@ -1,6 +1,7 @@
 package com.ml.toolkit.form.service.data;
 
 import com.ml.toolkit.form.domain.data.FormData;
+import com.ml.toolkit.form.domain.sys.SimpleUser;
 import com.ml.toolkit.form.dto.form.data.FormDataDto;
 import com.ml.toolkit.form.vo.form.data.FormDataVo;
 import com.ml.toolkit.mybatis.plus.base.BaseService;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public interface FormDataService extends BaseService<FormData> {
 
-    void saveData(FormDataDto dto);
+    void saveData(FormDataDto dto, SimpleUser user);
 
     void deleteByIds(List<Long> ids);
 

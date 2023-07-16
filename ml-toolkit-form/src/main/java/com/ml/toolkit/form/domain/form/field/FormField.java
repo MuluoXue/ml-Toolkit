@@ -1,4 +1,4 @@
-package com.ml.toolkit.form.domain.data;
+package com.ml.toolkit.form.domain.form.field;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -8,18 +8,20 @@ import com.ml.toolkit.form.handler.form.FormTypeHandler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
-
 @TableName(resultMap = "resultMap")
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class FormData extends FormBaseEntity {
-    private static final long serialVersionUID = -652004015884665686L;
+public class FormField extends FormBaseEntity {
+    private static final long serialVersionUID = -5949839660728403782L;
 
+    /**
+     * 字段名称
+     */
+    private String name;
+
+    /**
+     * 表单ID
+     */
     @TableField(value = "form_id", typeHandler = FormTypeHandler.class)
     private Form form;
-
-    @TableField(exist = false)
-    private List<FormDataDetail> formDataDetailList;
-
 }

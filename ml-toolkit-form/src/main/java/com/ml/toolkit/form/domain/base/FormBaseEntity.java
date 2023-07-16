@@ -1,7 +1,11 @@
 package com.ml.toolkit.form.domain.base;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.ml.toolkit.form.domain.sys.SimpleUser;
+import com.ml.toolkit.form.handler.sys.SysUserTypeHandler;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,8 +23,13 @@ public class FormBaseEntity implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
+    @TableField(typeHandler = SysUserTypeHandler.class)
+    private SimpleUser creator;
+
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
 }

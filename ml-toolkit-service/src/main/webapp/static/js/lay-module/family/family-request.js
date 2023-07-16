@@ -5,17 +5,21 @@ layui.define(["jquery"], function (exports) {
     const $ = layui.$;
 
     const familyRequest = {
-        request: function (options, successFunction) {
+
+        request: function (options, successFunction, $clickEl) {
+            //校验按钮不能点击两次
+            this.verifyRepeatClick($clickEl);
+
+
             $.ajax({
                 url: this.getUrl(options.url),
                 type: 'post',
                 contentType: "application/json",
                 data: options?.param ? JSON.stringify(options.param) : "",
                 async: true,
-                headers: {
-                    "Bearer": window.localStorage.getItem('mlToken')
-                },
+                headers: this.getHeaders(),
                 success: function (data) {
+                    familyRequest.removeRepeatClick($clickEl);
                     if (data?.code !== 200) {
                         layer.msg(data?.message);
                     } else {
@@ -23,22 +27,27 @@ layui.define(["jquery"], function (exports) {
                     }
                 },
                 error: function (xhr) {
+                    familyRequest.removeRepeatClick($clickEl);
                     return layer.msg('Status:' + xhr.status + '，' + xhr.statusText + '，请稍后再试！');
                 }
             });
         },
-        requestLogin: function (options, successFunction) {
+        requestLogin: function (options, successFunction,$clickEl) {
+            //校验按钮不能点击两次
+            this.verifyRepeatClick($clickEl);
+
             $.ajax({
                 url: this.getUrl(options.url),
                 type: 'post',
                 contentType: "application/json",
                 data: options?.param ? JSON.stringify(options.param) : "",
                 async: true,
-                success: function (data, status,xhr) {
+                success: function (data, status, xhr) {
+                    familyRequest.removeRepeatClick($clickEl);
                     //获取服务端自定义的header信息
                     const token = xhr.getResponseHeader('Authorization');
                     if (token) {
-                        window.localStorage.setItem('mlToken',token)
+                        window.localStorage.setItem('mlToken', token)
                     }
                     if (data?.code !== 200) {
                         layer.msg(data?.message);
@@ -47,6 +56,7 @@ layui.define(["jquery"], function (exports) {
                     }
                 },
                 error: function (xhr) {
+                    familyRequest.removeRepeatClick($clickEl);
                     return layer.msg('Status:' + xhr.status + '，' + xhr.statusText + '，请稍后再试！');
                 }
             });
@@ -76,8 +86,32 @@ layui.define(["jquery"], function (exports) {
         getUrl: function (href) {
             const v = new Date().getTime();
             return href.indexOf("?") > -1 ? href + '&v=' + v : href + '?v=' + v;
-        }
+        },
 
+        getHeaders: function () {
+            return {
+                "Bearer": window.localStorage.getItem('mlToken')
+            }
+        },
+        /**
+         * 校验重复点击
+         */
+        verifyRepeatClick: function ($el) {
+            if ($el) {
+                if ($el.hasClass("layui-btn-disabled")) {
+                    layer.msg("请求处理中,请勿重复点击");
+                    throw new Error("repeatClick");
+                } else {
+                    $el.addClass('layui-btn-disabled');
+                    return true;
+                }
+            }
+        },
+        removeRepeatClick: function ($el) {
+            if ($el) {
+                $el.removeClass('layui-btn-disabled');
+            }
+        }
     }
     exports("familyRequest", familyRequest);
 })

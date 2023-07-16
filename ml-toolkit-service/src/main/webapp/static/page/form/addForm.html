@@ -32,12 +32,7 @@
                     layer.alert(JSON.stringify(data));
                     if (parentIndex) {
                         layer.close(parentIndex);
-                    } else {
-                        form.val('js_add_form_val_filter', {
-                            name:""
-                        });
                     }
-
                 })
                 return false; // 阻止默认 form 跳转
             });

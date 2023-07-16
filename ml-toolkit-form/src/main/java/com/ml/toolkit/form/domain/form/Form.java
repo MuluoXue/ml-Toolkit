@@ -19,4 +19,10 @@ public class Form extends FormBaseEntity {
      */
     private String name;
 
+    public Form() {
+    }
+
+    public Form(Long id) {
+        this.setId(id);
+    }
 }

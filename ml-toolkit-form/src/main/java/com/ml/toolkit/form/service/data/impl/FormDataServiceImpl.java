@@ -3,9 +3,11 @@ package com.ml.toolkit.form.service.data.impl;
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.form.dao.data.FormDataDao;
-import com.ml.toolkit.form.domain.FormField;
+import com.ml.toolkit.form.domain.form.Form;
+import com.ml.toolkit.form.domain.form.field.FormField;
 import com.ml.toolkit.form.domain.data.FormData;
 import com.ml.toolkit.form.domain.data.FormDataDetail;
+import com.ml.toolkit.form.domain.sys.SimpleUser;
 import com.ml.toolkit.form.dto.form.data.FormDataDto;
 import com.ml.toolkit.form.service.data.FormDataService;
 import com.ml.toolkit.form.service.data.FormDataDetailService;
@@ -36,22 +38,20 @@ public class FormDataServiceImpl extends BaseServiceImpl<FormDataDao, FormData> 
      * @param entity formData
      */
     @Override
-    public void saveData(FormDataDto dto) {
-        //修改
-        if (ObjectUtil.isNotEmpty(dto.getDataId())) {
-            formDataDetailService.saveBatchData(dto.getFormDataDetailList(), dto.getDataId());
-            // 新增
-        } else {
+    public void saveData(FormDataDto dto, SimpleUser user) {
+        Long formDataId = null;
+        // 新增
+        if (ObjectUtil.isEmpty(dto.getDataId())) {
+            formDataId = LongIdGenerator.generate();
             FormData formData = new FormData();
-            formData.setId(LongIdGenerator.generate());
-            formData.setFormId(dto.getFormId());
-            formData.setCreateTime(new Date());
+            formData.setId(formDataId);
+            formData.setForm(new Form(dto.getFormId()));
+            formData.setCreator(user);
             this.save(formData);
-
-            formDataDetailService.saveBatchData(dto.getFormDataDetailList(), formData.getId());
+        } else {
+            formDataId = dto.getDataId();
         }
-
-
+        formDataDetailService.saveBatchData(dto.getFormDataDetailList(), formDataId, user);
     }
 
     @Transactional

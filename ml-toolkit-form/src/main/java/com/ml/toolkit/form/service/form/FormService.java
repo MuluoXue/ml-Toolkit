@@ -1,6 +1,7 @@
-package com.ml.toolkit.form.service;
+package com.ml.toolkit.form.service.form;
 
 import com.ml.toolkit.form.domain.form.Form;
+import com.ml.toolkit.form.domain.sys.SimpleUser;
 import com.ml.toolkit.mybatis.plus.base.BaseService;
 
 /**
@@ -11,6 +12,6 @@ public interface FormService extends BaseService<Form> {
     /**
      * 保存表单
      */
-    void saveForm(Form form) ;
+    void saveForm(Form form, SimpleUser user) ;
 
 }

@@ -25,7 +25,7 @@ public class FormDataSearchServiceImpl implements FormDataSearchService {
     @Override
     public Map<String, Object> listByEntity(FormData formData) {
         Map<String,Object> formDataParam = new HashMap<>();
-        formDataParam.put("form_id", formData.getFormId());
+        formDataParam.put("form_id", formData.getForm().getId());
         List<FormData> formDataList = formDataService.listByMap(formDataParam);
 
         Map<String, Object> result = new HashMap<>();

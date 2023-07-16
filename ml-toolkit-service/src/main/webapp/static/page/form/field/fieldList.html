@@ -2,16 +2,26 @@
     <table class="layui-hide" id="js_form_field_table" lay-filter="family_form_field_table_filter"></table>
 </div>
 
+<script type="text/html" id="js_form_field_toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除</button>
+    </div>
+</script>
+
 <script>
     layui.use(['table', 'dropdown', 'familyRequest', 'familyPage'], function () {
-        const table = layui.table;
+        const table = layui.table,
+            familyRequest = layui.familyRequest;
         table.render({
             elem: '#js_form_field_table',
+            toolbar: '#js_form_field_toolbar',
             url: window.form.field.apiUrl.list,
+            headers: familyRequest.getHeaders(),
             method: "post",
             contentType: "application/json",
             dataType: "json",
-            where: {formId: window.form_id},
+            where: {form: {id: window.form_id}},
             response: {
                 statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
             },
@@ -30,6 +40,29 @@
                 {field: 'name', title: '名称'}
             ]],
         });
+        /**
+         * toolbar事件监听
+         */
+        table.on('toolbar(family_form_field_table_filter)', function (obj) {
+            let id = obj.config.id;
+            if (obj.event === 'add') {   // 监听添加操作
+                let content = familyRequest.getHrefContent(window.form.field.htmlUrl.addField);
+                layer.open({
+                    title: '添加字段',
+                    type: 1,
+                    area: ['80%', '80%'],
+                    content: content,
+                    end: function () {
+                        table.reload('js_form_field_table', {}, 'data');
+                    }
+                });
+            } else if (obj.event === 'delete') {  // 监听删除操作
+                let getData = table.getData(id);
+                console.log(getData);
+                layer.alert(layui.util.escape(JSON.stringify(getData)));
+            }
+        });
+
     });
 
 </script>

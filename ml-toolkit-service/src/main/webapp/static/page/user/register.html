@@ -3,7 +3,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" placeholder="请输入" autocomplete="off"
+                <input type="text" name="name" placeholder="请输入" lay-verify="required" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -49,53 +49,16 @@
             form.submit('js_user_register_val_filter', function (data) {
                 const field = data.field;
                 // 获取表单字段值
-                let result = false;
-
-
                 request.request({url: window.user.register.apiUrl.register, param: field}, function (data) {
                     layer.msg(data.message);
                     if (parentIndex) {
                         layer.close(parentIndex);
                     }
-                })
+                },$('.js_register_submit'))
                 // 阻止默认 form 跳转
                 return false;
             });
         });
-
-        // let checkInfo = function (data,result) {
-        //     validator.default.validate([
-        //         {
-        //             dataKey: "account",
-        //             value: data.account,
-        //             label: "账号",
-        //             rules: "required|email"
-        //         },
-        //         {
-        //             dataKey: "password",
-        //             value: data.password,
-        //             label: '密码',
-        //             rules: "required"
-        //         },
-        //         {
-        //             dataKey: "two_password",
-        //             value: data.two_password,
-        //             label: '二次密码',
-        //             rules: "required|confirmed:password"
-        //         }
-        //     ],{
-        //         checkAll: false
-        //     }).then(() => {
-        //         result = true;
-        //     }).catch((error) => {
-        //         const objKeys = Object.keys(error);
-        //         let errorMsgList = [];
-        //         objKeys.forEach(function (key) {
-        //             errorMsgList.push(error[key]);
-        //         })
-        //         layer.msg(errorMsgList[0]);
-        //     });
-        // }
     });
 
 

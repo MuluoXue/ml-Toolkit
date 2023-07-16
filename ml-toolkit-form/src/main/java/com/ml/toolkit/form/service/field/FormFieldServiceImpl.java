@@ -3,7 +3,8 @@ package com.ml.toolkit.form.service.field;
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.form.dao.form.field.FormFieldDao;
-import com.ml.toolkit.form.domain.FormField;
+import com.ml.toolkit.form.domain.form.Form;
+import com.ml.toolkit.form.domain.form.field.FormField;
 import com.ml.toolkit.form.dto.form.field.FormFieldDto;
 import com.ml.toolkit.form.exception.FormException;
 import com.ml.toolkit.form.exception.FormResultCode;
@@ -24,7 +25,7 @@ public class FormFieldServiceImpl extends BaseServiceImpl<FormFieldDao, FormFiel
 
     @Transactional
     @Override
-    public void batchSave(List<FormFieldDto> list, Long formId) throws FormException {
+    public void batchSave(List<FormFieldDto> list, Form form) throws FormException {
         if (ObjectUtil.isNotEmpty(list)) {
             List<FormField> formFieldList = new ArrayList<>();
             for (FormFieldDto dto : list) {
@@ -33,7 +34,7 @@ public class FormFieldServiceImpl extends BaseServiceImpl<FormFieldDao, FormFiel
                 }
                 FormField formField = new FormField();
                 formField.setId(LongIdGenerator.generate());
-                formField.setFormId(formId);
+                formField.setForm(form);
                 formField.setName(dto.getName());
                 formField.setCreateTime(new Date());
                 formFieldList.add(formField);

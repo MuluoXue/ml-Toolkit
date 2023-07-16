@@ -1,6 +1,6 @@
 package com.ml.toolkit.form.vo.form.data;
 
-import com.ml.toolkit.form.domain.FormField;
+import com.ml.toolkit.form.domain.form.field.FormField;
 import com.ml.toolkit.form.domain.data.FormData;
 import lombok.Data;
 
