@@ -1,9 +1,12 @@
 /**
  * request 组件
  */
-layui.define(["jquery"], function (exports) {
-    const $ = layui.$;
-
+layui.define(['familyFormText','familyFormSelect','familyFormDate'], function (exports) {
+    const formConfig = {
+        'TEXT': layui.familyFormText,
+        'SELECT': layui.familyFormSelect,
+        'DATE': layui.familyFormDate
+    }
     const familyFormField = {
 
         /**
@@ -14,15 +17,23 @@ layui.define(["jquery"], function (exports) {
         renderHtml: function (fieldList) {
             let html = "";
             fieldList.forEach(function (field) {
-                html += '<div class="layui-form-item"> <label class="layui-form-label">';
-                html += field.name;
-                html += '</label> <div class="layui-input-block"><input type="text" name="';
-                html += field.id;
-                html += '" placeholder="请输入" autoComplete="off" class="layui-input"> </div></div>';
+                const fieldConfig = formConfig[field.type];
+                if (fieldConfig) {
+                    html += '<div class="layui-form-item"> <label class="layui-form-label">';
+                    html += field.name;
+                    html += '</label> <div class="layui-input-block">';
+                    html += fieldConfig.renderHtml(field);
+                    html += '</div></div>'
+                }
             })
             return html;
-        }
+        },
 
+        afterRender: function ($el) {
+            layui.laydate.render({
+                elem: $el.find("input[lay-verify='date']"),
+            });
+        }
     }
     exports("familyFormField", familyFormField);
 })

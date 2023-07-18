@@ -3,10 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ml.toolkit.form.dao.form.field.FormFieldDao">
 
-<resultMap id="resultMap" type="com.ml.toolkit.form.domain.form.field.FormField">
-    <result property="id" column="id" />
-    <result property="name" column="name" />
-    <association property="form" typeHandler="com.ml.toolkit.form.handler.form.FormTypeHandler" />
-    <association property="creator" typeHandler="com.ml.toolkit.form.handler.sys.SysUserTypeHandler"/>
-</resultMap>
+    <resultMap id="resultMap" type="com.ml.toolkit.form.domain.form.field.FormField">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <association property="form" typeHandler="com.ml.toolkit.form.handler.form.FormTypeHandler"/>
+    </resultMap>
 </mapper>

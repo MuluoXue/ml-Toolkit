@@ -12,6 +12,7 @@
     <title>Title</title>
     <!-- 引入 layui.css -->
     <link rel="stylesheet" href="../../../static/layui/css/layui.css"/>
+    <link rel="stylesheet" href="../../../static/css/tk_form.css">
     <!-- 引入 layui.js -->
     <script src="../../../static/layui/layui.js"></script>
     <script src ="../../../static/js/lay-module/family-config.js"></script>

@@ -14,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +31,7 @@ public class FormFieldController extends BaseController {
     private FormFieldService formFieldService;
 
     @RequestMapping("/save")
-    public Result save(@RequestBody FormField formField) {
-        Assert.notEmpty("param is empty", formField, formField.getForm(), formField.getName());
-
-        formField.setCreateTime(new Date());
+    public Result save(@RequestBody @Valid FormField formField) {
         formField.setId(LongIdGenerator.generate());
         formField.setCreator(getCurrentUser());
 

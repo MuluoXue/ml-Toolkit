@@ -1,10 +1,24 @@
 <div class="js_add_field">
     <form class="layui-form" lay-filter="js_add_field_val_filter">
         <div class="layui-form-item">
-            <label class="layui-form-label">字段名称</label>
+            <label class="layui-form-label">字段名称
+                <label class="tk_form_required_label">*</label>
+            </label>
             <div class="layui-input-block">
                 <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off"
                        class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型
+                <label class="tk_form_required_label">*</label>
+            </label>
+            <div class="layui-input-block">
+                <select name="type">
+                    <option value="TEXT" selected>TEXT</option>
+                    <option value="DATE" >DATE</option>
+                </select>
             </div>
         </div>
     </form>
@@ -16,12 +30,16 @@
 
 </div>
 
+<
+
 <script>
     layui.use(['form', "familyRequest"], function () {
         const form = layui.form;
         const layer = layui.layer;
         const request = layui.familyRequest,
         $=layui.$;
+
+        form.render("select");
 
         // 当前弹出层，防止ID被覆盖
         const parentIndex = layer.index;

@@ -5,7 +5,10 @@ window.rootPath = window.location.protocol + "//" + window.location.host;
 
 
 const form_config = {
-    familyFormField: "form/family-form-field"
+    familyFormField: "form/family-form-field",
+    familyFormText: 'form/family-form-text',
+    familyFormSelect: 'form/family-form-select',
+    familyFormDate: 'form/family-form-date'
 }
 
 layui.config({

@@ -1,5 +1,5 @@
 <div class="js_form_data_detail" style="border:1px solid red; padding: 20px">
-    <form class="layui-form js_form_data_form" lay-filter="js_form_data_val_filter"></form>
+    <form class="layui-form js_form_data_form" id='js_form_data_form' lay-filter="js_form_data_val_filter"></form>
     <div class="layui-input-block">
         <button class="layui-btn js_form_data_submit" lay-submit lay-filter="submit">立即提交</button>
         <button class="layui-btn layui-btn-primary">Reset</button>
@@ -24,6 +24,8 @@
             const formHtml = familyFormField.renderHtml(data.data?.formFieldList);
             $el.html(formHtml);
             $el.append($("#js_form_data_form_submit").html());
+
+            familyFormField.afterRender($("#js_form_data_form"));
 
             if (window.edit_form_data_id && data.data?.formData) {
                 const formData = data.data.formData;
