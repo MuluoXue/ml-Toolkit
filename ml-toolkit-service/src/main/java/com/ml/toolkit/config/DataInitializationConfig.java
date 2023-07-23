@@ -57,8 +57,10 @@ public class DataInitializationConfig {
             try {
                 List<String> lines = Files.readAllLines(Paths.get(file.getPath()));
                 for (String line : lines) {
-                    sql = line;
-                    sqlExecutionDao.execute(sql);
+                    if (ObjectUtil.isNotEmpty(line)) {
+                        sql = line;
+                        sqlExecutionDao.execute(sql);
+                    }
                 }
             } catch (Exception e) {
                 sqlExecutionRecord.setState(1);
