@@ -3,7 +3,8 @@ window.form = {
     apiUrl: {
         save: "/form/save",
         list: "/form/list",
-        deleteById: '/form/deleteById'
+        deleteById: '/form/deleteById',
+        exportSql: '/form/exportSql'
     },
     htmlUrl: {
         addForm: "/static/page/form/addForm.html"

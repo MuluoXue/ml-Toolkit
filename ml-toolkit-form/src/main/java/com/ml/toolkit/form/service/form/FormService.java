@@ -14,4 +14,5 @@ public interface FormService extends BaseService<Form> {
      */
     void saveForm(Form form, SimpleUser user) ;
 
+    void exportSql(Long formId, SimpleUser currentUser);
 }

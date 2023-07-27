@@ -39,14 +39,65 @@ public class JavaBeanToSqlUtil implements Serializable {
             return createSql.toString();
         }
 
-        return tableName;
+        return "";
+    }
+
+    public static String toInsertSql(Object obj, String tableName) throws IllegalAccessException, NoSuchFieldException {
+        StringBuilder str = new StringBuilder("INSERT INTO ");
+        Class<?> aClass = obj.getClass();
+        if (ObjectUtil.isEmpty(tableName)) {
+            tableName = aClass.getSimpleName();
+        }
+        tableName = tableName.toLowerCase(Locale.ROOT);
+        str.append(tableName).append(" form (");
+
+        List<Field> list = new ArrayList<>();
+        list.addAll(getField(aClass.getSuperclass(), true));
+        list.addAll(getField(aClass, false));
+
+        StringBuilder fieldSql = new StringBuilder();
+        StringBuilder valueSql = new StringBuilder();
+        if (ObjectUtil.isNotEmpty(list)) {
+            for (Field declaredField : list) {
+                declaredField.setAccessible(true);
+                Object objValue = declaredField.get(obj);
+                if (ObjectUtil.isNotEmpty(objValue)) {
+                    String name = declaredField.getName();
+                    if ("serialVersionUID".equals(name)) {
+                        continue;
+                    }
+                    if ("creator".equals(name)) {
+                        Class<?> type = objValue.getClass();
+                        Field idField  = type.getDeclaredField("id");
+                        idField.setAccessible(true);
+                        objValue = idField.get(objValue);
+                        System.out.println(objValue);
+                    }
+                    fieldSql.append(convertFileName(name)).append(", ");
+                    valueSql.append(objValue).append(", ");
+                }
+            }
+        }
+        if (ObjectUtil.isNotEmpty(fieldSql)) {
+            str.append(fieldSql.substring(0,fieldSql.length() -2));
+        }
+        str.append(") VALUES (");
+        if (ObjectUtil.isNotEmpty(valueSql)) {
+            str.append(valueSql.substring(0,valueSql.length() -2));
+        }
+        str.append(" ); \n");
+
+        //6228948461889469752, '234', 1, null, null);
+        return str.toString();
     }
 
     private static List<Field> getField(Class<?> aClass, boolean containParent ) {
         List<Field> list = new ArrayList<>();
-        if (aClass != null && containParent) {
+        if (aClass != null) {
             list.addAll(Arrays.asList(aClass.getDeclaredFields()));
-            getField(aClass.getSuperclass(), containParent);
+            if (containParent) {
+                getField(aClass.getSuperclass(), containParent);
+            }
         }
         return list;
     }

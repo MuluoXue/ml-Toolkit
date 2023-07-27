@@ -9,6 +9,8 @@ import com.ml.toolkit.mybatis.plus.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * @author ml
  * @date 2023年05月11日 20:34
@@ -24,4 +26,15 @@ public class FormServiceImpl extends BaseServiceImpl<FormDao, Form> implements F
         form.setCreator(user);
         this.save(form);
     }
+
+    @Override
+    public void exportSql(Long formId, SimpleUser currentUser) {
+        // 查询表单数据详情
+        Form form = this.getById(formId);
+
+
+
+        // 查询字段数据详情
+    }
+
 }

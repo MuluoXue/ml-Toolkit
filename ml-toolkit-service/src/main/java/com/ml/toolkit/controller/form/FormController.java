@@ -1,6 +1,7 @@
 package com.ml.toolkit.controller.form;
 
 import com.ml.toolkit.common.result.Result;
+import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.controller.BaseController;
 import com.ml.toolkit.form.domain.form.Form;
 import com.ml.toolkit.form.service.form.FormService;
@@ -34,6 +35,13 @@ public class FormController extends BaseController {
     @RequestMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable("id") Long id) {
         formService.removeById(id);
+        return Result.success();
+    }
+
+    @RequestMapping("/exportSql/{id}")
+    public Result exportSql(@PathVariable("id") Long formId) {
+        Assert.notEmpty("formId is empty", formId);
+        formService.exportSql(formId, getCurrentUser());
         return Result.success();
     }
 }
