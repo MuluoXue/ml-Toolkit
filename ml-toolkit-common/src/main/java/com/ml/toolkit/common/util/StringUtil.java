@@ -31,4 +31,15 @@ public class StringUtil {
     public static boolean isNotEmpty(CharSequence str) {
         return !isEmpty(str);
     }
+
+    /**
+     * 将驼峰模式转换为下划线方式展示
+     * @param str 内容
+     * @return 转换后的结果
+     */
+    public static String camelCaseToUnderscore(String str) {
+        String regex = "([a-z])([A-Z]+)";
+        String replacement = "$1_$2";
+        return str.replaceAll(regex, replacement).toLowerCase();
+    }
 }
