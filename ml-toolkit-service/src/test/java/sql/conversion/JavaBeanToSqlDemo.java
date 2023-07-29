@@ -20,7 +20,7 @@ public class JavaBeanToSqlDemo implements Serializable {
     }
 
     @Test
-    public void toInsertSql() throws IllegalAccessException, NoSuchFieldException {
+    public void toInsertSql() {
         Form form = new Form();
         form.setId(1L);
         form.setName("ceshi");

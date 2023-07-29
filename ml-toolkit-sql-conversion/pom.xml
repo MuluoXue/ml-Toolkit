@@ -16,6 +16,11 @@
             <groupId>ml.toolkit</groupId>
             <artifactId>ml-toolkit-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>
