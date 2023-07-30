@@ -4,7 +4,7 @@ window.form = {
         save: "/form/save",
         list: "/form/list",
         deleteById: '/form/deleteById',
-        exportSql: '/form/exportSql'
+        exportSql: '/papi/form/exportSql'
     },
     htmlUrl: {
         addForm: "/static/page/form/addForm.html"

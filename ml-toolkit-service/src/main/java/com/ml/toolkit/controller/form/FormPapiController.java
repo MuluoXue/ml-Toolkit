@@ -6,7 +6,10 @@ import com.ml.toolkit.controller.BaseController;
 import com.ml.toolkit.form.domain.form.Form;
 import com.ml.toolkit.form.service.form.FormService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -17,34 +20,16 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/form")
-public class FormController extends BaseController {
+@RequestMapping("/papi/form")
+public class FormPapiController extends BaseController {
 
     private static final long serialVersionUID = 645405808493944751L;
 
     @Resource
     private FormService formService;
 
-    @RequestMapping("/save")
-    public Result save(@RequestBody Form form) {
-        formService.saveForm(form, getCurrentUser());
-        return Result.success();
-    }
-
-    @RequestMapping("/list")
-    public Result list() {
-        List<Form> list = formService.list();
-        return Result.success(list);
-    }
-
-    @RequestMapping("/deleteById/{id}")
-    public Result deleteById(@PathVariable("id") Long id) {
-        formService.removeById(id);
-        return Result.success();
-    }
-
     @RequestMapping("/exportSql/{id}")
-    public Result exportSql(@PathVariable("id") Long formId, HttpServletResponse response) {
+    public void exportSql(@PathVariable("id") Long formId, HttpServletResponse response) {
         Assert.notEmpty("formId is empty", formId);
         File file = null;
         try {
@@ -71,6 +56,5 @@ public class FormController extends BaseController {
                 boolean delete = file.delete();
             }
         }
-        return Result.success();
     }
 }

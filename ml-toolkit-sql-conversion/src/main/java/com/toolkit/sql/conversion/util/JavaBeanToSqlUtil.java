@@ -15,6 +15,7 @@ public class JavaBeanToSqlUtil implements Serializable {
             InsertSql sql = new InsertSql();
             return sql.generate(obj, tableName);
         } catch (Exception e) {
+            e.printStackTrace();
 //            log.error("toInsertSql error ", e);
             throw new SqlConversionException();
         }
@@ -32,6 +33,7 @@ public class JavaBeanToSqlUtil implements Serializable {
             CreateSql sql = new CreateSql();
             return sql.generate(obj, tableName);
         } catch (Exception e) {
+            e.printStackTrace();
 //            log.error("createSql error ", e);
             throw new SqlConversionException();
         }

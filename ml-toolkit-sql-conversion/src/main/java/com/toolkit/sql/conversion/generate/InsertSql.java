@@ -7,6 +7,7 @@ import com.toolkit.sql.conversion.util.FieldUtil;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -23,7 +24,7 @@ public class InsertSql extends GenerateAbstract implements Serializable {
         StringBuilder str = new StringBuilder("INSERT INTO ");
         Class<?> aClass = obj.getClass();
         if (ObjectUtil.isEmpty(tableName)) {
-            tableName = aClass.getSimpleName();
+            tableName = StringUtil.camelCaseToUnderscore(aClass.getSimpleName());
         }
         tableName = tableName.toLowerCase(Locale.ROOT);
         str.append(tableName).append(" (");
@@ -42,24 +43,41 @@ public class InsertSql extends GenerateAbstract implements Serializable {
                     }
                     Class<?> type = objValue.getClass();
                     if (!ReflectionUtil.isWrapperType(type) && type != Date.class && type != String.class) {
-                        Field idField  = type.getDeclaredField("id");
-                        idField.setAccessible(true);
-                        objValue = idField.get(objValue);
+                        try {
+                            Field idField = type.getDeclaredField("id");
+                            idField.setAccessible(true);
+                            objValue = idField.get(objValue);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+
                     fieldSql.append(StringUtil.camelCaseToUnderscore(name)).append(", ");
-                    valueSql.append(objValue).append(", ");
+                    valueSql.append(findValue(objValue)).append(", ");
                 }
             }
         }
         if (ObjectUtil.isNotEmpty(fieldSql)) {
-            str.append(fieldSql.substring(0,fieldSql.length() -2));
+            str.append(fieldSql.substring(0, fieldSql.length() - 2));
         }
         str.append(") VALUES (");
         if (ObjectUtil.isNotEmpty(valueSql)) {
-            str.append(valueSql.substring(0,valueSql.length() -2));
+            str.append(valueSql.substring(0, valueSql.length() - 2));
         }
         str.append(" ); \n");
 
         return str.toString();
+    }
+
+    private String findValue(Object value) {
+        Class<?> aClass = value.getClass();
+        if (aClass == String.class) {
+            return "'" + value + "'";
+        } else if (aClass == Date.class) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            return "'" + format.format(value) + "'";
+        } else {
+            return String.valueOf(value);
+        }
     }
 }

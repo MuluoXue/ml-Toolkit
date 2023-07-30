@@ -181,9 +181,7 @@
         });
 
         const exportSql = function (id) {
-            familyRequest.request({url: window.form.apiUrl.exportSql + "/" + data.id}, function (params) {
-                layer.msg(params?.message);
-            })
+            window.open(window.form.apiUrl.exportSql + "/" + id);
         }
     });
 
