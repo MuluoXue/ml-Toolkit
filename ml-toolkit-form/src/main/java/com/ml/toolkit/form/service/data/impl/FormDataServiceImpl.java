@@ -35,11 +35,11 @@ public class FormDataServiceImpl extends BaseServiceImpl<FormDataDao, FormData> 
     /**
      * 创建表单数据
      *
-     * @param entity formData
+     * @param dto formData
      */
     @Override
     public void saveData(FormDataDto dto, SimpleUser user) {
-        Long formDataId = null;
+        Long formDataId;
         // 新增
         if (ObjectUtil.isEmpty(dto.getDataId())) {
             formDataId = LongIdGenerator.generate();

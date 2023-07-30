@@ -48,6 +48,7 @@ public class InsertSql extends GenerateAbstract implements Serializable {
                             idField.setAccessible(true);
                             objValue = idField.get(objValue);
                         } catch (Exception e) {
+                            System.out.println("name-->" + name);
                             e.printStackTrace();
                         }
                     }
@@ -71,13 +72,13 @@ public class InsertSql extends GenerateAbstract implements Serializable {
 
     private String findValue(Object value) {
         Class<?> aClass = value.getClass();
-        if (aClass == String.class) {
-            return "'" + value + "'";
-        } else if (aClass == Date.class) {
+        if (aClass == Date.class) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             return "'" + format.format(value) + "'";
-        } else {
+        } else if (aClass == Long.class) {
             return String.valueOf(value);
+        } else {
+            return "'" + value + "'";
         }
     }
 }

@@ -3,4 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ml.toolkit.form.dao.data.FormDataDetailDao">
 
+    <resultMap id="resultMap" type="com.ml.toolkit.form.domain.data.FormDataDetail">
+        <result property="id" column="id"/>
+        <result property="fieldId" column="field_id"/>
+        <result property="dataId" column="data_id"/>
+        <result property="content" column="content"/>
+        <association property="creator" javaType="com.ml.toolkit.form.domain.sys.SimpleUser">
+            <id property="id" column="creator"/>
+        </association>
+    </resultMap>
 </mapper>

@@ -5,6 +5,7 @@ import com.ml.toolkit.common.util.ObjectUtil;
 import com.ml.toolkit.dao.sql.SqlExecutionDao;
 import com.ml.toolkit.domain.sql.SqlExecutionRecord;
 import com.ml.toolkit.service.sql.SqlExecutionRecordService;
+import com.toolkit.sql.conversion.exception.SqlConversionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -42,10 +43,11 @@ public class DataInitializationConfig {
         Resource[] resources = applicationContext.getResources("classpath*:/sql/sqlRecord/*.sql");
         for (Resource resource : resources) {
             File file = resource.getFile();
-            String fileName = file.getName();
+            String fileName = file.getName().replaceAll(".sql", "");
             QueryWrapper<SqlExecutionRecord> wrapper = new QueryWrapper<>();
             wrapper.lambda().eq(SqlExecutionRecord::getExecutionName, fileName);
             List<SqlExecutionRecord> list = sqlExecutionRecordService.list(wrapper);
+
             if (ObjectUtil.isNotEmpty(list)) {
                 return;
             }
@@ -66,7 +68,7 @@ public class DataInitializationConfig {
                 sqlExecutionRecord.setState(1);
                 sqlExecutionRecord.setErrorSql(sql);
                 String errorMsg = e.getMessage();
-                if (e instanceof  BadSqlGrammarException) {
+                if (e instanceof BadSqlGrammarException) {
                     SQLException sqlException = ((BadSqlGrammarException) e).getSQLException();
                     errorMsg = sqlException.getMessage();
                 }
@@ -76,6 +78,7 @@ public class DataInitializationConfig {
                 sqlExecutionRecord.setErrorMsg(errorMsg);
                 log.error("执行sql失败， sql所在文件名称 {}, 错误sql： {}", file.getName(), sql);
                 log.error("DataInitializationConfig init error ", e);
+                throw new SqlConversionException("error");
             } finally {
                 sqlExecutionRecord.setExecutionName(fileName);
                 sqlExecutionRecordService.save(sqlExecutionRecord);

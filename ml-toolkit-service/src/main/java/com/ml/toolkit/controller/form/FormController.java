@@ -42,35 +42,4 @@ public class FormController extends BaseController {
         formService.removeById(id);
         return Result.success();
     }
-
-    @RequestMapping("/exportSql/{id}")
-    public Result exportSql(@PathVariable("id") Long formId, HttpServletResponse response) {
-        Assert.notEmpty("formId is empty", formId);
-        File file = null;
-        try {
-            file = formService.exportSql(formId, getCurrentUser());
-
-            // 设置响应头信息
-            response.setContentType("application/octet-stream");
-            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
-
-            // 将文件内容写入响应的输出流
-            FileInputStream fis = new FileInputStream(file);
-            OutputStream os = response.getOutputStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            fis.close();
-            os.close();
-        } catch (Exception e) {
-            log.error("exportSql error : ", e);
-        } finally {
-            if (file != null) {
-                boolean delete = file.delete();
-            }
-        }
-        return Result.success();
-    }
 }

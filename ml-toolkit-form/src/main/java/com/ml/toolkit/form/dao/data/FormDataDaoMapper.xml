@@ -5,6 +5,6 @@
 
     <resultMap id="resultMap" type="com.ml.toolkit.form.domain.data.FormData">
         <result property="id" column="id"/>
-        <association property="form" typeHandler="com.ml.toolkit.form.handler.form.FormTypeHandler"/>
+<!--        <association property="form" typeHandler="com.ml.toolkit.form.handler.form.FormTypeHandler"/>-->
     </resultMap>
 </mapper>

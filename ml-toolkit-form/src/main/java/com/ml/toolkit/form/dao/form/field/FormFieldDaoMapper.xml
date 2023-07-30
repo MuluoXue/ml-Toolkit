@@ -7,6 +7,11 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <association property="form" typeHandler="com.ml.toolkit.form.handler.form.FormTypeHandler"/>
+        <association property="form" javaType="com.ml.toolkit.form.domain.form.Form">
+            <id property="id" column="form_id"/>
+        </association>
+        <association property="creator" javaType="com.ml.toolkit.form.domain.sys.SimpleUser">
+            <id property="id" column="creator"/>
+        </association>
     </resultMap>
 </mapper>

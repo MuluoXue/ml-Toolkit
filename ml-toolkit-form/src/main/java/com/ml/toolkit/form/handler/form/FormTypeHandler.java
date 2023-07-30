@@ -23,14 +23,11 @@ public class FormTypeHandler implements TypeHandler<Form> {
 
     @Override
     public Form getResult(ResultSet rs, String columnName) throws SQLException {
-        log.info("1");
-        Form form = new Form();
-        return form;
+        return null;
     }
 
     @Override
     public Form getResult(ResultSet rs, int columnIndex) throws SQLException {
-        log.info("2");
         return null;
     }
 

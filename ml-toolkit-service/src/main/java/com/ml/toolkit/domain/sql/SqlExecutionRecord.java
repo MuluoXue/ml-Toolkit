@@ -1,6 +1,5 @@
 package com.ml.toolkit.domain.sql;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.ml.toolkit.domain.sys.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -5,6 +5,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author ml
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @ComponentScan("com.ml")
 @EnableAsync
+@EnableScheduling
 public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class).run(args);

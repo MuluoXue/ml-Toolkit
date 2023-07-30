@@ -34,6 +34,7 @@
         <lombok.version>1.16.18</lombok.version>
         <mybatis.plus.spring.boot>3.4.2</mybatis.plus.spring.boot>
         <ml.toolkit.version>1.0.0.develop.version</ml.toolkit.version>
+        <unirest.java>3.5.00</unirest.java>
     </properties>
 
     <dependencyManagement>
@@ -120,6 +121,13 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>0.9.0</version>
+            </dependency>
+
+            <!-- http client 请求发送 一般情形下maven引用的方式 -->
+            <dependency>
+                <groupId>com.konghq</groupId>
+                <artifactId>unirest-java</artifactId>
+                <version>${unirest.java}</version>
             </dependency>
 
 
