@@ -4,7 +4,7 @@ spring:
   application:
     name: ml-toolkit-service
   profiles:
-    include: develop
+    include: product
   mvc:
     view:
       prefix: /WEB-INF/content/

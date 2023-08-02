@@ -1,5 +1,7 @@
 package com.ml.toolkit.form.vo.form.data;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ml.toolkit.form.domain.data.FormDataDetail;
 import com.ml.toolkit.form.domain.form.field.FormField;
 import com.ml.toolkit.form.domain.data.FormData;
 import lombok.Data;
@@ -14,4 +16,8 @@ public class FormDataVo implements Serializable {
     private FormData formData;
 
     private List<FormField> formFieldList;
+
+    private List<FormDataDetail> formDataDetailList;
+
+    private Page<FormData> page;
 }

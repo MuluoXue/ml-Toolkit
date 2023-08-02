@@ -2,7 +2,6 @@ package com.ml.toolkit.controller.form;
 
 import com.ml.toolkit.common.result.Result;
 import com.ml.toolkit.controller.BaseController;
-import com.ml.toolkit.form.domain.data.FormData;
 import com.ml.toolkit.form.dto.form.data.FormDataDto;
 import com.ml.toolkit.form.service.data.FormDataSearchService;
 import com.ml.toolkit.form.service.data.FormDataService;
@@ -32,8 +31,8 @@ public class FormDataController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public Result list(@RequestBody FormData formData) {
-        return Result.success(formDataSearchService.listByEntity(formData));
+    public Result list(@RequestBody FormDataDto param) {
+        return Result.success(formDataSearchService.listPageByEntity(param));
     }
 
     @RequestMapping("/deleteByIds")
