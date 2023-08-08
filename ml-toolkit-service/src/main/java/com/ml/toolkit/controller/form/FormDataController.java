@@ -32,7 +32,7 @@ public class FormDataController extends BaseController {
 
     @RequestMapping("/list")
     public Result list(@RequestBody FormDataDto param) {
-        return Result.success(formDataSearchService.listPageByEntity(param));
+        return Result.success(formDataSearchService.pageByEntity(param));
     }
 
     @RequestMapping("/deleteByIds")

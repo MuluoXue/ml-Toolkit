@@ -4,7 +4,9 @@ import com.ml.toolkit.common.util.ObjectUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -26,10 +28,27 @@ public class ListUtil implements Serializable {
      */
     public static <T, R> List<R> listToList(List<T> list, Function<T, R> func) {
         List<R> res = new ArrayList<>();
-        for (T t : list) {
-            res.add(func.apply(t));
-        }
+        list.forEach(t -> res.add(func.apply(t)));
         return res;
+    }
+
+    /**
+     * 将list 转换为 map List的形式
+     * @param list 源数据
+     * @param keyFunc 获取key的方法
+     * @param func 获取data的方法
+     * @param <K> key泛型
+     * @param <T> 列表对象泛型
+     * @param <R> 返回数据泛型
+     * @return map
+     */
+    public static <K, T, R> Map<K, List<R>> listToMapList(List<T> list, Function<T, K> keyFunc, Function<T, R> func) {
+        Map<K, List<R>> map = new HashMap<>(list.size());
+        list.forEach(t -> {
+            K key = keyFunc.apply(t);
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(func.apply(t));
+        });
+        return map;
     }
 
     /**

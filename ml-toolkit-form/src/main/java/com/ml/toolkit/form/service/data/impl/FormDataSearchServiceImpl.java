@@ -15,9 +15,10 @@ import com.ml.toolkit.form.vo.form.data.FormDataVo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 @Component
 public class FormDataSearchServiceImpl implements FormDataSearchService {
@@ -28,22 +29,21 @@ public class FormDataSearchServiceImpl implements FormDataSearchService {
     private FormDataDetailService formDataDetailService;
 
     @Override
-    public FormDataVo listPageByEntity(FormDataDto param) {
+    public Page<FormData> pageByEntity(FormDataDto param) {
         Assert.notEmpty("params is empty", param.getFormId());
         Page<FormData> page = new Page<>(param.getPage(), param.getLimit());
         QueryWrapper<FormData> wr = new QueryWrapper<>();
         wr.lambda().eq(FormData::getForm, param.getFormId());
         page = formDataService.page(page, wr);
         List<FormData> formDataList = page.getRecords();
-
-        FormDataVo vo = new FormDataVo();
-        vo.setPage(page);
         if (ObjectUtil.isNotEmpty(formDataList)) {
             List<FormDataDetail> formDataDetails = formDataDetailService.listByFormDataIdList(ListUtil.listToList(formDataList, FormData::getId));
             if (ObjectUtil.isNotEmpty(formDataDetails)) {
-                vo.setFormDataDetailList(formDataDetails);
+                Map<Long, List<FormDataDetail>> longListMap = ListUtil.listToMapList(formDataDetails, FormDataDetail::getDataId, Function.identity());
+                formDataList.forEach(formData -> formData.setFormDataDetailList(longListMap.getOrDefault(formData.getId(), new ArrayList<>())));
             }
         }
-        return vo;
+        page.setRecords(formDataList);
+        return page;
     }
 }

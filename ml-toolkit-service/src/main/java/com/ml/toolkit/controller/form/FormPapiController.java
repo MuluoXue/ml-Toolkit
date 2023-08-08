@@ -1,13 +1,10 @@
 package com.ml.toolkit.controller.form;
 
-import com.ml.toolkit.common.result.Result;
 import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.controller.BaseController;
-import com.ml.toolkit.form.domain.form.Form;
 import com.ml.toolkit.form.service.form.FormService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
-import java.util.List;
 
 @Slf4j
 @RestController

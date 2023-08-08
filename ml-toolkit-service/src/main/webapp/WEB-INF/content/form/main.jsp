@@ -81,9 +81,9 @@
         </div>
     </div>
 
-    <div class="layui-body j_lay_ui_body">
+    <div id="id_lay_ui_body" class="layui-body j_lay_ui_body">
         <!-- 内容主体区域 -->
-        <div class="j_lay_ui_content"></div>
+        <div id="id_lay_ui_content" class="j_lay_ui_content"></div>
     </div>
 
     <div class="layui-footer">

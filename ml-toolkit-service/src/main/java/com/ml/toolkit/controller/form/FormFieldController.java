@@ -1,24 +1,19 @@
 package com.ml.toolkit.controller.form;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ml.toolkit.common.generate.LongIdGenerator;
 import com.ml.toolkit.common.result.Result;
-import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.controller.BaseController;
 import com.ml.toolkit.form.domain.form.field.FormField;
+import com.ml.toolkit.form.param.FormFieldSearchParam;
 import com.ml.toolkit.form.service.field.FormFieldService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -40,10 +35,12 @@ public class FormFieldController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public Result list(@RequestBody FormField formField) {
+    public Result list(@RequestBody FormFieldSearchParam param) {
         QueryWrapper<FormField> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(FormField::getForm, formField.getForm().getId());
-        List<FormField> list = formFieldService.list(wrapper);
-        return Result.success(list);
+        wrapper.lambda().eq(FormField::getForm, param.getFormId());
+        if (param.isNoPage()) {
+            return Result.success(formFieldService.list(wrapper));
+        }
+        return Result.success(formFieldService.page(new Page<>(param.getPage(), param.getLimit()), wrapper));
     }
 }

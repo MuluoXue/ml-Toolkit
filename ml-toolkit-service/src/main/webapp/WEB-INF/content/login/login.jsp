@@ -111,12 +111,12 @@
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username"></label>
                     <input type="text" name="account" lay-verify="required|account" placeholder="邮箱" autocomplete="off"
-                           class="layui-input" value="15136200812@163.com">
+                           class="layui-input">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password"></label>
                     <input type="password" name="password" lay-verify="required|password" placeholder="密码"
-                           autocomplete="off" class="layui-input" value="123">
+                           autocomplete="off" class="layui-input">
                 </div>
                 <%--                <div class="layui-form-item">--%>
                 <%--                    <label class="layui-icon layui-icon-vercode" for="captcha"></label>--%>

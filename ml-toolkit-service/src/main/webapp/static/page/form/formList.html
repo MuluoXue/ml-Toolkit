@@ -1,4 +1,4 @@
-<div class="js_form_list">
+<div id="id_form_list" class="js_form_list">
     <fieldset class="table-search-fieldset">
         <legend>搜索信息</legend>
         <div style="margin: 10px 10px 10px 10px">
@@ -38,7 +38,7 @@
         </div>
     </fieldset>
 
-    <table class="layui-hide" id="js_form_table" lay-filter="family_form_table_filter"/>
+    <table class="layui-hide" id="js_form_table" lay-filter="family_form_table_filter"></table>
 
     <script type="text/html" id="js_form_toolbar">
         <div class="layui-btn-container">
@@ -73,6 +73,12 @@
             elem: '#js_form_table',
             toolbar: '#js_form_toolbar',
             url: window.form.apiUrl.list,
+            method: "post",
+            contentType: "application/json",
+            dataType: "json",
+            page: true,
+            height: '#id_lay_ui_body-44',
+            maxHeight: '800',
             response: {
                 statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
             },
@@ -82,8 +88,8 @@
                 return {
                     "code": res.code, //解析接口状态
                     "msg": res.message, //解析提示文本
-                    // "count": res.total, //解析数据长度
-                    "data": res.data //解析数据列表
+                    "count": res.data.total, //解析数据长度
+                    "data": res.data?.records //解析数据列表
                 };
             },
             cols: [[

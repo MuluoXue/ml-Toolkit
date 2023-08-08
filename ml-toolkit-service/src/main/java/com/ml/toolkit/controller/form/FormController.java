@@ -1,9 +1,11 @@
 package com.ml.toolkit.controller.form;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ml.toolkit.common.result.Result;
 import com.ml.toolkit.common.util.Assert;
 import com.ml.toolkit.controller.BaseController;
 import com.ml.toolkit.form.domain.form.Form;
+import com.ml.toolkit.form.param.FormSearchParam;
 import com.ml.toolkit.form.service.form.FormService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +34,8 @@ public class FormController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public Result list() {
-        List<Form> list = formService.list();
-        return Result.success(list);
+    public Result list(@RequestBody FormSearchParam param) {
+        return Result.success(formService.page(new Page<>(param.getPage(), param.getLimit())));
     }
 
     @RequestMapping("/deleteById/{id}")
